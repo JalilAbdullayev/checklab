@@ -44,6 +44,14 @@
                         </span>
                     </a>
                 </li>
+                <li>
+                    <a class="waves-effect waves-dark" href="{{ route('admin.contact') }}" aria-expanded="false">
+                        <i class="icon-phone"></i>
+                        <span class="hide-menu">
+                            Əlaqə
+                        </span>
+                    </a>
+                </li>
                 <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
                         <i class="icon-speedometer"></i>
                         <span class="hide-menu">

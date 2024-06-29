@@ -47,7 +47,7 @@
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" name="keywords" id="keywords" placeholder="Açar Sözlər" required
                        maxlength="255" value="{{ $settings->keywords }}"/>
-                <label for="author" class="form-label text-white-50">
+                <label for="keywords" class="form-label text-white-50">
                     Açar Sözlər
                 </label>
             </div>

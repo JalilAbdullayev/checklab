@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\FrontController;
@@ -15,5 +16,10 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::prefix('settings')->name('settings')->group(function() {
         Route::get('/', [SettingsController::class, 'index']);
         Route::post('/', [SettingsController::class, 'update']);
+    });
+
+    Route::prefix('contact')->name('contact')->group(function() {
+        Route::get('/', [ContactController::class, 'index']);
+        Route::post('/', [ContactController::class, 'update']);
     });
 });
