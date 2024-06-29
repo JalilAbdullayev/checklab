@@ -38,6 +38,9 @@
                     Telefon
                 </label>
             </div>
+            @error('phone')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             <div class="form-floating mb-3">
                 <input type="email" class="form-control" name="email" id="email" placeholder="E-mail" required
                        maxlength="255" value="{{ $contact->email }}"/>
@@ -45,6 +48,9 @@
                     E-mail
                 </label>
             </div>
+            @error('email')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" name="address" id="address" placeholder="Ünvan" required
                        maxlength="255" value="{{ $contact->address }}"/>
@@ -52,6 +58,9 @@
                     Ünvan
                 </label>
             </div>
+            @error('address')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             <div class="form-floating mb-3">
                 <input type="url" class="form-control" name="facebook" id="facebook" placeholder="Facebook" required
                        maxlength="255" value="{{ $contact->facebook }}"/>
@@ -59,6 +68,9 @@
                     Facebook
                 </label>
             </div>
+            @error('facebook')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             <div class="form-floating mb-3">
                 <input type="url" class="form-control" name="instagram" id="instagram" placeholder="Instagram" required
                        maxlength="255" value="{{ $contact->instagram }}"/>
@@ -66,6 +78,9 @@
                     Instagram
                 </label>
             </div>
+            @error('instagram')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             <div class="form-floating mb-3">
                 <input type="url" class="form-control" name="whatsapp" id="whatsapp" placeholder="WhatsApp" required
                        maxlength="255" value="{{ $contact->whatsapp }}"/>
@@ -73,6 +88,9 @@
                     WhatsApp
                 </label>
             </div>
+            @error('whatsapp')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             <div class="mb-3">
                 <label for="work_hours" class="form-label text-white-50">
                     İş saatları
@@ -80,6 +98,9 @@
                 <textarea class="form-control" name="work_hours" id="work_hours" required maxlength="255"
                           placeholder="İş saatları">{{ $contact->work_hours }}</textarea>
             </div>
+            @error('work_hours')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             <button type="submit" class="btn w-100 btn-primary text-white">
                 Yadda saxla
             </button>
