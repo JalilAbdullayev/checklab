@@ -30,25 +30,33 @@
             <ul id="sidebarnav">
                 <li>
                     <a class="waves-effect waves-dark" href="{{ route('admin.index') }}" aria-expanded="false">
-                        <i class="icon-speedometer"></i>
-                        <span class="hide-menu">
+						<i class="icon-speedometer"></i>
+						<span class="hide-menu">
                             Ana Səhifə
                         </span>
-                    </a>
-                </li>
-                <li>
-                    <a class="waves-effect waves-dark" href="{{ route('admin.settings') }}" aria-expanded="false">
-                        <i class="icons-Gears"></i>
-                        <span class="hide-menu">
+					</a>
+				</li>
+				<li>
+					<a class="waves-effect waves-dark" href="{{ route('admin.settings') }}" aria-expanded="false">
+						<i class="icons-Gears"></i>
+						<span class="hide-menu">
                             Parametrlər
                         </span>
-                    </a>
-                </li>
-                <li>
-                    <a class="waves-effect waves-dark" href="{{ route('admin.contact') }}" aria-expanded="false">
+					</a>
+				</li>
+				<li>
+					<a class="waves-effect waves-dark" href="{{ route('admin.contact') }}" aria-expanded="false">
+						<i class="icon-phone"></i>
+						<span class="hide-menu">
+                            Əlaqə
+                        </span>
+					</a>
+				</li>
+				<li>
+					<a class="waves-effect waves-dark" href="{{ route('admin.messages.index') }}" aria-expanded="false">
                         <i class="icon-phone"></i>
                         <span class="hide-menu">
-                            Əlaqə
+                            Mesajlar
                         </span>
                     </a>
                 </li>
