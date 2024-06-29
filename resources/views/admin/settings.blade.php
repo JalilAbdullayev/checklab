@@ -37,6 +37,9 @@
                     Başlıq
                 </label>
             </div>
+            @error('title')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" name="author" id="author" placeholder="Müəllif" required
                        maxlength="255" value="{{ $settings->author }}"/>
@@ -44,6 +47,9 @@
                     Müəllif
                 </label>
             </div>
+            @error('author')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" name="keywords" id="keywords" placeholder="Açar Sözlər" required
                        maxlength="255" value="{{ $settings->keywords }}"/>
@@ -51,6 +57,9 @@
                     Açar Sözlər
                 </label>
             </div>
+            @error('keywords')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             <div class="form-floating mb-3">
                 <textarea class="form-control" name="description" id="description" required
                           placeholder="Haqqımızda">{{ $settings->description }}</textarea>
@@ -58,6 +67,9 @@
                     Haqqımızda
                 </label>
             </div>
+            @error('description')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             <div class="mb-3">
                 <label for="favicon" class="form-label text-white-50">
                     Favicon
@@ -65,6 +77,9 @@
                 <input type="file" name="favicon" id="favicon" class="dropify" data-show-remove="false"
                        data-default-file="{{ asset('storage/'. $settings->favicon) }}"/>
             </div>
+            @error('favicon')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             <div class="mb-3">
                 <label for="logo" class="form-label text-white-50">
                     Loqo
@@ -72,6 +87,9 @@
                 <input type="file" name="logo" id="logo" class="dropify" data-show-remove="false"
                        data-default-file="{{ asset('storage/'. $settings->logo) }}"/>
             </div>
+            @error('logo')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             <button type="submit" class="btn w-100 btn-primary text-white">
                 Yadda saxla
             </button>
