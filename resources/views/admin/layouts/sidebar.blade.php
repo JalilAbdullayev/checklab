@@ -54,7 +54,7 @@
 				</li>
 				<li>
 					<a class="waves-effect waves-dark" href="{{ route('admin.messages.index') }}" aria-expanded="false">
-                        <i class="icon-phone"></i>
+                        <i class="icon-envelope"></i>
                         <span class="hide-menu">
                             Mesajlar
                         </span>
