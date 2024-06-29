@@ -23,7 +23,7 @@ class SettingRequest extends FormRequest {
         $image = 'image|mimes:jpeg,png,jpg,gif,svg|max:2048';
         return [
             'title' => $rule,
-            'description' => $rule,
+            'description' => 'required',
             'author' => $rule,
             'keywords' => $rule,
             'logo' => $image,
@@ -32,26 +32,25 @@ class SettingRequest extends FormRequest {
     }
 
     public function messages() {
-        $required = 'The :attribute field is required.';
-        $max = 'The :attribute may not be greater than :max characters.';
-        $image = 'The :attribute must be an image.';
-        $mimes = 'The :attribute must be a file of type: jpeg, png, jpg, gif, svg.';
-        $imageMax = 'The :attribute may not be greater than :max kilobytes.';
+        $required = ' boş buraxıla bilməz.';
+        $max = ' uzunluğu :max simvoldan çox ola bilməz.';
+        $image = ' şəkil olmalıdır.';
+        $mimes = ' bu fayl tiplərindən biri olmalıdır: jpeg, png, jpg, gif, svg.';
+        $imageMax = ' ölçüsü 2MB-dan çox ola bilməz.';
         return [
-            'title.required' => $required,
-            'title.max' => $max,
-            'description.required' => $required,
-            'description.max' => $max,
-            'author.required' => $required,
-            'author.max' => $max,
-            'keywords.required' => $required,
-            'keywords.max' => $max,
-            'favicon.image' => $image,
-            'favicon.mimes' => $mimes,
-            'favicon.max' => $imageMax,
-            'logo.image' => $image,
-            'logo.mimes' => $mimes,
-            'logo.max' => $imageMax
+            'title.required' => 'Başlıq' . $required,
+            'title.max' => 'Başlıq' . $max,
+            'description.required' => 'Haqqımızda' . $required,
+            'author.required' => 'Müəllif adı' . $required,
+            'author.max' => 'Müəllif adının' . $max,
+            'keywords.required' => 'Açar sözlər' . $required,
+            'keywords.max' => 'Açar sözlərin' . $max,
+            'favicon.image' => 'Favicon' . $image,
+            'favicon.mimes' => 'Favicon' . $mimes,
+            'favicon.max' => 'Favicon' . $imageMax,
+            'logo.image' => 'Loqo' . $image,
+            'logo.mimes' => 'Loqo' . $mimes,
+            'logo.max' => 'Loqo' . $imageMax
 
         ];
     }

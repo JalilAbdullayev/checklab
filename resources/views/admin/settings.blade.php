@@ -4,9 +4,7 @@
     <link rel="stylesheet" href="{{ asset("back/node_modules/dropify/dist/css/dropify.min.css") }}"/>
 @endsection
 @section('content')
-    <!-- ============================================================== -->
-    <!-- Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
+    <!-- Bread crumb -->
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
             <h4 class="text-white-50">
@@ -28,9 +26,7 @@
             </div>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- End Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
+    <!-- End Bread crumb -->
     <form class="card" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="card-body">
