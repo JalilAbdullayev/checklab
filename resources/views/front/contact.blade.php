@@ -115,28 +115,28 @@
                             @endif
                             <div class="form-group">
                                 <label for="name">Your name</label>
-                                <input type="text" id="name" name="name"/>
+                                <input type="text" id="name" name="name" required maxlength="255"/>
                             </div>
                             @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             <div class="form-group">
                                 <label for="email">Your email</label>
-                                <input type="email" id="email" name="email"/>
+                                <input type="email" id="email" name="email" required maxlength="255"/>
                             </div>
                             @error('email')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             <div class="form-group">
                                 <label for="subject">Subject</label>
-                                <input type="text" id="subject" name="subject"/>
+                                <input type="text" id="subject" name="subject" required maxlength="255"/>
                             </div>
                             @error('subject')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             <div class="form-group">
                                 <label for="message">Your message</label>
-                                <textarea rows="12" id="message" name="message"></textarea>
+                                <textarea rows="12" id="message" name="message" required></textarea>
                             </div>
                             @error('message')
                             <div class="alert alert-danger">{{ $message }}</div>

@@ -15,6 +15,7 @@ Route::prefix('contact')->name('contact')->group(function() {
     Route::get('/', [FrontController::class, 'contact']);
     Route::post('/', [MessageController::class, 'store']);
 });
+Route::post('subscribe', [SubscriberController::class, 'store'])->name('subscribe');
 
 Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('/', [HomeController::class, 'index'])->name('index');
@@ -32,5 +33,10 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::get('/', [MessageController::class, 'index'])->name('index');
         Route::get('message/{id}', [MessageController::class, 'show'])->name('show');
         Route::get('delete/{id}', [MessageController::class, 'delete'])->name('delete');
+    });
+
+    Route::prefix('subscribers')->name('subscribers.')->group(function() {
+        Route::get('/', [SubscriberController::class, 'index'])->name('index');
+        Route::get('delete/{id}', [SubscriberController::class, 'delete'])->name('delete');
     });
 });

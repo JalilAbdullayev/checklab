@@ -54,9 +54,18 @@
 				</li>
 				<li>
 					<a class="waves-effect waves-dark" href="{{ route('admin.messages.index') }}" aria-expanded="false">
-                        <i class="icon-envelope"></i>
-                        <span class="hide-menu">
+						<i class="icon-envelope"></i>
+						<span class="hide-menu">
                             Mesajlar
+                        </span>
+					</a>
+				</li>
+				<li>
+					<a class="waves-effect waves-dark" href="{{ route('admin.subscribers.index') }}"
+                       aria-expanded="false">
+                        <i class="icon-people"></i>
+                        <span class="hide-menu">
+                            Abunəçilər
                         </span>
                     </a>
                 </li>
