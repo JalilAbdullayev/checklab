@@ -11,11 +11,11 @@
                     </a>
                     <div class="dropdown-menu animated flipInY">
                         <!-- text-->
-                        <a href="javascript:void(0)" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
+                        <a href="javascript:void(0)" class="dropdown-item"><i class="ti-user"></i> Profil</a>
                         <!-- text-->
                         <div class="dropdown-divider"></div>
                         <!-- text-->
-                        <a href="pages-login.html" class="dropdown-item"><i class="ti-power-off"></i> Logout</a>
+                        <a href="pages-login.html" class="dropdown-item"><i class="ti-power-off"></i> Çıxış</a>
                         <!-- text-->
                     </div>
                 </div>
@@ -28,7 +28,15 @@
                     <a class="waves-effect waves-dark" href="{{ route('admin.index') }}" aria-expanded="false">
                         <i class="icon-speedometer"></i>
                         <span class="hide-menu">
-                            Home
+                            Ana Səhifə
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a class="waves-effect waves-dark" href="{{ route('admin.settings') }}" aria-expanded="false">
+                        <i class="icons-Gears"></i>
+                        <span class="hide-menu">
+                            Parametrlər
                         </span>
                     </a>
                 </li>
