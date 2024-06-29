@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
+:root{
+    --blue-1:#15a9e3;
+    --blue-2: #184363;
+    --orange-1:#f2971f;
+    --trans-1:all .3s ease;
+    --green-1:#39cb74;
+} 
+body{
+    overflow-x: hidden;
+    font-family: "Inter Tight", sans-serif;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}

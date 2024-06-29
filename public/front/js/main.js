@@ -1,0 +1,25 @@
+$(function(){
+    $(".language-toggle").click(function(){
+        $(".language-box").toggleClass("box");
+    })
+    $(".category-toggle").click(function(){
+        $(".mega-menu").toggle();
+      });
+      
+$(".search-mobile-toggle").click(function(){
+    $(".search-box").addClass('active');
+})
+$(".search-box-toggle").click(function(){
+    $(".search-box").removeClass('active');
+})
+$(".mobile-toggle").click(function(){
+    $(".mobile-header").addClass('active');
+})
+$(".mobile-toggle").click(function(){
+    $(".mobile-overlay").addClass('active');
+})
+$(".mobile-overlay").click(function(){
+    $(".mobile-header").removeClass('active');
+    $(this).removeClass('active');
+})
+})
