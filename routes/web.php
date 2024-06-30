@@ -1,12 +1,15 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SubscriberController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use UniSharp\LaravelFilemanager\Lfm;
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('about', [FrontController::class, 'about'])->name('about');
@@ -39,4 +42,14 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::get('/', [SubscriberController::class, 'index'])->name('index');
         Route::get('delete/{id}', [SubscriberController::class, 'delete'])->name('delete');
     });
+
+    Route::prefix('about')->name('about')->group(function() {
+        Route::get('/', [AboutController::class, 'index']);
+        Route::post('/', [AboutController::class, 'update']);
+    });
+    Route::prefix('laravel-filemanager')->middleware(['web', 'auth'])->group(static function() {
+        Lfm::routes();
+    });
 });
+
+Auth::routes();

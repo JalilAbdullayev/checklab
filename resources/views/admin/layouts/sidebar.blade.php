@@ -45,6 +45,14 @@
 					</a>
 				</li>
 				<li>
+					<a class="waves-effect waves-dark" href="{{ route('admin.about') }}" aria-expanded="false">
+						<i class="icon-info"></i>
+						<span class="hide-menu">
+                            Haqqımızda
+                        </span>
+					</a>
+				</li>
+				<li>
 					<a class="waves-effect waves-dark" href="{{ route('admin.contact') }}" aria-expanded="false">
 						<i class="icon-phone"></i>
 						<span class="hide-menu">

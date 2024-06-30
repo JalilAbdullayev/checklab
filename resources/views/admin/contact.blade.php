@@ -96,7 +96,7 @@
                     İş saatları
                 </label>
                 <textarea class="form-control" name="work_hours" id="work_hours" required maxlength="255"
-                          placeholder="İş saatları">{{ $contact->work_hours }}</textarea>
+                          placeholder="İş saatları">{!! $contact->work_hours !!}</textarea>
             </div>
             @error('work_hours')
             <div class="alert alert-danger">{{ $message }}</div>
@@ -111,9 +111,13 @@
     <script src="{{ asset('back/ckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('back/ckeditor/samples/js/sample.js') }}"></script>
     <script>
-        var about = CKEDITOR.replace('work_hours', {
+        const about = CKEDITOR.replace('work_hours', {
             extraAllowedContent: 'div',
             height: 150,
+            filebrowserImageBrowseUrl: '/admin/laravel-filemanager?type=Images',
+            filebrowserImageUploadUrl: '/admin/laravel-filemanager/upload?type=Images&_token=',
+            filebrowserBrowseUrl: '/admin/laravel-filemanager?type=Files',
+            filebrowserUploadUrl: '/admin/laravel-filemanager/upload?type=Files&_token='
         });
     </script>
 @endsection
