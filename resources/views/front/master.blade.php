@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8"/>
     <meta name="author" content="{{ $settings->author }}"/>
@@ -178,7 +178,7 @@
                                 <a href="{{ route('about') }}">Haqqımızda</a>
                             </li>
                             <li>
-                                <a href="{{ route('blog') }}">Bloq</a>
+                                <a href="{{ route('blog.index') }}">Bloq</a>
                             </li>
                             <li>
                                 <a href="{{ route('contact') }}">Əlaqə</a>
@@ -666,7 +666,7 @@
                                     <a href="{{ route('about') }}">Haqqımızda</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('blog') }}">Bloq </a>
+                                    <a href="{{ route('blog.index') }}">Bloq </a>
                                 </li>
                                 <li>
                                     <a href="">Kampaniyalar</a>

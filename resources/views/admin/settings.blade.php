@@ -75,7 +75,8 @@
                     Favicon
                 </label>
                 <input type="file" name="favicon" id="favicon" class="dropify" data-show-remove="false"
-                       data-default-file="{{ asset('storage/'. $settings->favicon) }}"/>
+                       accept="image/jpeg, image/png, image/jpg, image/gif, image/svg"
+                       data-default-file="{{ Storage::url($settings->favicon) }}"/>
             </div>
             @error('favicon')
             <div class="alert alert-danger">{{ $message }}</div>
@@ -85,7 +86,8 @@
                     Loqo
                 </label>
                 <input type="file" name="logo" id="logo" class="dropify" data-show-remove="false"
-                       data-default-file="{{ asset('storage/'. $settings->logo) }}"/>
+                       accept="image/jpeg, image/png, image/jpg, image/gif, image/svg"
+                       data-default-file="{{ Storage::url($settings->logo) }}"/>
             </div>
             @error('logo')
             <div class="alert alert-danger">{{ $message }}</div>

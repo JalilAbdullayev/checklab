@@ -57,6 +57,7 @@
                     Şəkil
                 </label>
                 <input type="file" name="image" id="image" class="dropify" data-show-remove="false"
+                       accept="image/jpeg, image/png, image/jpg, image/gif, image/svg"
                        data-default-file="{{ asset('storage/'. $about->image) }}"/>
             </div>
             @error('image')

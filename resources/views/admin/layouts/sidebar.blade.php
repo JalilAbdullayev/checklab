@@ -30,46 +30,46 @@
             <ul id="sidebarnav">
                 <li>
                     <a class="waves-effect waves-dark" href="{{ route('admin.index') }}" aria-expanded="false">
-						<i class="icon-speedometer"></i>
-						<span class="hide-menu">
+                        <i class="icon-speedometer"></i>
+                        <span class="hide-menu">
                             Ana Səhifə
                         </span>
-					</a>
-				</li>
-				<li>
-					<a class="waves-effect waves-dark" href="{{ route('admin.settings') }}" aria-expanded="false">
-						<i class="icons-Gears"></i>
-						<span class="hide-menu">
+                    </a>
+                </li>
+                <li>
+                    <a class="waves-effect waves-dark" href="{{ route('admin.settings') }}" aria-expanded="false">
+                        <i class="icons-Gears"></i>
+                        <span class="hide-menu">
                             Parametrlər
                         </span>
-					</a>
-				</li>
-				<li>
-					<a class="waves-effect waves-dark" href="{{ route('admin.about') }}" aria-expanded="false">
-						<i class="icon-info"></i>
-						<span class="hide-menu">
+                    </a>
+                </li>
+                <li>
+                    <a class="waves-effect waves-dark" href="{{ route('admin.about') }}" aria-expanded="false">
+                        <i class="icon-info"></i>
+                        <span class="hide-menu">
                             Haqqımızda
                         </span>
-					</a>
-				</li>
-				<li>
-					<a class="waves-effect waves-dark" href="{{ route('admin.contact') }}" aria-expanded="false">
-						<i class="icon-phone"></i>
-						<span class="hide-menu">
+                    </a>
+                </li>
+                <li>
+                    <a class="waves-effect waves-dark" href="{{ route('admin.contact') }}" aria-expanded="false">
+                        <i class="icon-phone"></i>
+                        <span class="hide-menu">
                             Əlaqə
                         </span>
-					</a>
-				</li>
-				<li>
-					<a class="waves-effect waves-dark" href="{{ route('admin.messages.index') }}" aria-expanded="false">
-						<i class="icon-envelope"></i>
-						<span class="hide-menu">
+                    </a>
+                </li>
+                <li>
+                    <a class="waves-effect waves-dark" href="{{ route('admin.messages.index') }}" aria-expanded="false">
+                        <i class="icon-envelope"></i>
+                        <span class="hide-menu">
                             Mesajlar
                         </span>
-					</a>
-				</li>
-				<li>
-					<a class="waves-effect waves-dark" href="{{ route('admin.subscribers.index') }}"
+                    </a>
+                </li>
+                <li>
+                    <a class="waves-effect waves-dark" href="{{ route('admin.subscribers.index') }}"
                        aria-expanded="false">
                         <i class="icon-people"></i>
                         <span class="hide-menu">
@@ -77,16 +77,32 @@
                         </span>
                     </a>
                 </li>
-                <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-                        <i class="icon-speedometer"></i>
+                <li>
+                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                        <i class="icon-docs"></i>
                         <span class="hide-menu">
-                            Dashboard
+                            Bloq
                         </span>
                     </a>
                     <ul aria-expanded="false" class="collapse">
                         <li>
-                            <a href="index-2.html">
-                                Minimal
+                            <a href="{{ route('admin.blog.index') }}">
+                                Bloq
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.blog.create') }}">
+                                Yeni Bloq
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.blog.category.index') }}">
+                                Kateqoriyalar
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.blog.tag.index') }}">
+                                Teqlər
                             </a>
                         </li>
                     </ul>
