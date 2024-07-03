@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\CartProduct;
+use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -82,5 +84,28 @@ class CartController extends Controller {
         $cart = Cart::whereUserId(Auth::user()->id)->first();
         $cart->products()->detach();
         return Redirect::back();
+    }
+
+    public function submit() {
+        $cart = Cart::whereUserId(Auth::user()->id)->first();
+        $order = new Order;
+        $order->user_id = Auth::user()->id;
+        $total = 0;
+        $order->total = $total;
+        $order->save();
+        foreach($cart->cart_products as $cartProduct) {
+            $product = Product::findOrFail($cartProduct->product_id);
+            $product->decrement('quantity', $cartProduct->quantity);
+            $orderProduct = new OrderProduct;
+            $orderProduct->order_id = $order->id;
+            $orderProduct->product_id = $product->id;
+            $orderProduct->quantity = $cartProduct->quantity;
+            $orderProduct->save();
+            $total = $cartProduct->quantity * ($product->price - (($product->price * $product->discount) / 100));
+        }
+        $order->total = $total;
+        $order->save();
+        $cart->products()->detach();
+        return Redirect::route('admin.order.index');
     }
 }

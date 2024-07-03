@@ -137,7 +137,10 @@
                                 </tr>
                                 </tbody>
                             </table>
-                                <a href="" class="checkout-btn">Checkout</a>
+                            <form action="{{ route('cart.submit') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="checkout-btn">Checkout</button>
+                            </form>
                         </div>
                     </div>
                 </div>

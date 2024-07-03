@@ -182,6 +182,16 @@
                             <a href="{{ route('cart.index') }}" class="basket-btn">
                                 <img src="{{ asset("front/images/icons/cart.svg")}}" alt="cart"/>
                             </a>
+                            <a href="{{ route('admin.index') }}">
+                                <i class="fa-regular fa-user"></i>
+                            </a>
+                        @else
+                            <a href="{{ route('login') }}" class="login-btn">
+                                Giriş
+                            </a>
+                            <a href="{{ route('register') }}" class="register-btn">
+                                Qeydiyyat
+                            </a>
                         @endauth
                     </div>
                 </div>

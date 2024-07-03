@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Facades\Auth; @endphp
 <aside class="left-sidebar">
     <!-- Sidebar scroll-->
     <div class="scroll-sidebar">
@@ -7,7 +8,7 @@
                 <div class="dropdown">
                     <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu"
                        data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        Steave Gection <span class="caret"></span>
+                        {{ Auth::user()->name }} <span class="caret"></span>
                     </a>
                     <div class="dropdown-menu animated flipInY">
                         <!-- text-->
@@ -17,9 +18,12 @@
                         <!-- text-->
                         <div class="dropdown-divider"></div>
                         <!-- text-->
-                        <a href="pages-login.html" class="dropdown-item">
-                            <i class="ti-power-off"></i> Çıxış
-                        </a>
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <button type="submit" class="dropdown-item">
+                                <i class="ti-power-off"></i> Çıxış
+                            </button>
+                        </form>
                         <!-- text-->
                     </div>
                 </div>
@@ -36,107 +40,131 @@
                         </span>
                     </a>
                 </li>
-                <li>
-                    <a class="waves-effect waves-dark" href="{{ route('admin.settings') }}" aria-expanded="false">
-                        <i class="icons-Gears"></i>
-                        <span class="hide-menu">
+                @if(Auth::user()->role == 0)
+                    <li>
+                        <a class="waves-effect waves-dark" href="{{ route('admin.settings') }}" aria-expanded="false">
+                            <i class="icons-Gears"></i>
+                            <span class="hide-menu">
                             Parametrlər
                         </span>
-                    </a>
-                </li>
-                <li>
-                    <a class="waves-effect waves-dark" href="{{ route('admin.about') }}" aria-expanded="false">
-                        <i class="icon-info"></i>
-                        <span class="hide-menu">
+                        </a>
+                    </li>
+                @endif
+                @if(Auth::user()->role < 2)
+                    <li>
+                        <a class="waves-effect waves-dark" href="{{ route('admin.about') }}" aria-expanded="false">
+                            <i class="icon-info"></i>
+                            <span class="hide-menu">
                             Haqqımızda
                         </span>
-                    </a>
-                </li>
-                <li>
-                    <a class="waves-effect waves-dark" href="{{ route('admin.contact') }}" aria-expanded="false">
-                        <i class="icon-phone"></i>
-                        <span class="hide-menu">
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect waves-dark" href="{{ route('admin.contact') }}" aria-expanded="false">
+                            <i class="icon-phone"></i>
+                            <span class="hide-menu">
                             Əlaqə
                         </span>
-                    </a>
-                </li>
-                <li>
-                    <a class="waves-effect waves-dark" href="{{ route('admin.messages.index') }}" aria-expanded="false">
-                        <i class="icon-envelope"></i>
-                        <span class="hide-menu">
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect waves-dark" href="{{ route('admin.messages.index') }}"
+                           aria-expanded="false">
+                            <i class="icon-envelope"></i>
+                            <span class="hide-menu">
                             Mesajlar
                         </span>
-                    </a>
-                </li>
-                <li>
-                    <a class="waves-effect waves-dark" href="{{ route('admin.subscribers.index') }}"
-                       aria-expanded="false">
-                        <i class="icon-people"></i>
-                        <span class="hide-menu">
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect waves-dark" href="{{ route('admin.subscribers.index') }}"
+                           aria-expanded="false">
+                            <i class="icon-people"></i>
+                            <span class="hide-menu">
                             Abunəçilər
                         </span>
-                    </a>
-                </li>
-                <li>
-                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-                        <i class="icon-docs"></i>
-                        <span class="hide-menu">
+                        </a>
+                    </li>
+                    <li>
+                        <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                            <i class="icon-docs"></i>
+                            <span class="hide-menu">
                             Bloq
                         </span>
-                    </a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li>
-                            <a href="{{ route('admin.blog.index') }}">
-                                Bloq
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.blog.create') }}">
-                                Yeni Bloq
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.blog.category.index') }}">
-                                Kateqoriyalar
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.blog.tag.index') }}">
-                                Teqlər
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-                        <i class="icon-bag"></i>
-                        <span class="hide-menu">
+                        </a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li>
+                                <a href="{{ route('admin.blog.index') }}">
+                                    Bloq
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.blog.create') }}">
+                                    Yeni Bloq
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.blog.category.index') }}">
+                                    Kateqoriyalar
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.blog.tag.index') }}">
+                                    Teqlər
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                            <i class="icon-bag"></i>
+                            <span class="hide-menu">
                             Məhsullar
                         </span>
-                    </a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li>
-                            <a href="{{ route('admin.products.index') }}">
-                                Məhsullar
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.products.create') }}">
-                                Yeni Məhsul
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.products.category.index') }}">
-                                Kateqoriyalar
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.products.tag.index') }}">
-                                Teqlər
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                        </a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li>
+                                <a href="{{ route('admin.products.index') }}">
+                                    Məhsullar
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.products.create') }}">
+                                    Yeni Məhsul
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.products.category.index') }}">
+                                    Kateqoriyalar
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.products.tag.index') }}">
+                                    Teqlər
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="waves-effect waves-dark" href="{{ route('admin.order.all') }}"
+                           aria-expanded="false">
+                            <i class="icons-Shopping-Cart"></i>
+                            <span class="hide-menu">
+                            Sifarişlər
+                        </span>
+                        </a>
+                    </li>
+                @else
+                    <li>
+                        <a class="waves-effect waves-dark" href="{{ route('admin.order.index') }}"
+                           aria-expanded="false">
+                            <i class="icons-Shopping-Cart"></i>
+                            <span class="hide-menu">
+                            Sifarişlər
+                        </span>
+                        </a>
+                    </li>
+                @endif
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
