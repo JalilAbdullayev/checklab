@@ -95,18 +95,14 @@
                     <div class="product-search">
                         <form action="">
                             <select name="category" class="category">
-                                <option clas="default">Kataloq</option>
+                                <option class="default">Kataloq</option>
                                 <option>Hədiyyə check up kartları</option>
                                 <option>Bestseller</option>
                                 <option>Genetik panellər</option>
                             </select>
                             <div class="search-wrapper">
                                 <input type="text" placeholder="Axtardığınız sözü yazın"/>
-                                <img
-                                    class="loader"
-                                    src="{{ asset("front/images/icons/loader.svg")}}"
-                                    alt="loader"
-                                />
+                                <img class="loader" src="{{ asset("front/images/icons/loader.svg")}}" alt="loader"/>
                                 <button type="submit" class="input-after-btn">
                                     <img
                                         src="{{ asset("front/images/icons/search.svg")}}"
@@ -135,8 +131,7 @@
                     <button class="search-mobile-toggle">
                         <svg viewBox="0 0 6.35 6.35" xmlns="http://www.w3.org/2000/svg">
                             <path
-                                d="M2.894.511a2.384 2.384 0 0 0-2.38 2.38 2.386 2.386 0 0 0 2.38 2.384c.56 0 1.076-.197 1.484-.523l.991.991a.265.265 0 0 0 .375-.374l-.991-.992a2.37 2.37 0 0 0 .523-1.485C5.276 1.58 4.206.51 2.894.51zm0 .53c1.026 0 1.852.825 1.852 1.85S3.92 4.746 2.894 4.746s-1.851-.827-1.851-1.853.825-1.852 1.851-1.852z"
-                            ></path>
+                                d="M2.894.511a2.384 2.384 0 0 0-2.38 2.38 2.386 2.386 0 0 0 2.38 2.384c.56 0 1.076-.197 1.484-.523l.991.991a.265.265 0 0 0 .375-.374l-.991-.992a2.37 2.37 0 0 0 .523-1.485C5.276 1.58 4.206.51 2.894.51zm0 .53c1.026 0 1.852.825 1.852 1.85S3.92 4.746 2.894 4.746s-1.851-.827-1.851-1.853.825-1.852 1.851-1.852z"></path>
                         </svg>
                     </button>
                     <button class="mobile-toggle">
@@ -180,13 +175,14 @@
                 </div>
                 <div class="col-lg-2">
                     <div class="actions">
-                        <a href="wishlist.html" class="wishlist-btn">
-                            <img src="{{ asset("front/images/icons/wishlist.svg")}}" alt="wishlist"/>
-                        </a>
-                        <a href="c" class="basket-btn">
-                            <img src="{{ asset("front/images/icons/cart.svg")}}" alt="cart"/>
-                            <span class="count">1</span>
-                        </a>
+                        @auth
+                            <a href="wishlist.html" class="wishlist-btn">
+                                <img src="{{ asset("front/images/icons/wishlist.svg")}}" alt="wishlist"/>
+                            </a>
+                            <a href="{{ route('cart.index') }}" class="basket-btn">
+                                <img src="{{ asset("front/images/icons/cart.svg")}}" alt="cart"/>
+                            </a>
+                        @endauth
                     </div>
                 </div>
             </div>
@@ -198,45 +194,12 @@
                                 <li>
                                     <a href="">Allergiya Paketləri</a>
                                 </li>
-                                <li>
-                                    <a href="">Genetik paketlər</a>
-                                </li>
-                                <li>
-                                    <a href="">Kişilər üçün</a>
-                                </li>
-                                <li>
-                                    <a href="">Qadınlar üçün</a>
-                                </li>
-                                <li>
-                                    <a href="">Uşaqlar üçün</a>
-                                </li>
-                                <li>
-                                    <a href="">Ümumi check up</a>
-                                </li>
-                                <li>
-                                    <a href="">Hədiyyə kartları</a>
-                                </li>
-                                <li>
-                                    <a href="">Bestseller</a>
-                                </li>
-                                <li>
-                                    <a href="">Genetik panellər</a>
-                                </li>
                             </ul>
                         </div>
                         <div class="col-lg-2">
                             <div class="mega-menu-alt-category">
                                 <a href="" class="category-name"> Allergiya paketləri </a>
                                 <ul>
-                                    <li>
-                                        <a href="">lorem 1</a>
-                                    </li>
-                                    <li>
-                                        <a href="">lorem 1</a>
-                                    </li>
-                                    <li>
-                                        <a href="">lorem 1</a>
-                                    </li>
                                     <li>
                                         <a href="">lorem 1</a>
                                     </li>
@@ -303,162 +266,6 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                            <div class="swiper-slide">
-                                                <div class="product-card">
-                                                    <a href="product-detail.html">
-                                                        <div class="product-image">
-                                                            <img
-                                                                src="front/images/product20-300x300.jpg"
-                                                                alt=""
-                                                            />
-                                                        </div>
-                                                    </a>
-
-                                                    <div class="product-cat">
-                                                        <a href="">Vitamins</a>
-                                                        <a href="">Herbs</a>
-                                                    </div>
-                                                    <a
-                                                        href="product-detail.html"
-                                                        class="product-name"
-                                                    >
-                                                        Vitamin C 500mg Sugarless Tab X
-                                                    </a>
-                                                    <div class="price">
-                                                        <div class="old-price">$15.00</div>
-                                                        <span>-</span>
-                                                        <div class="new-price">$ 10.00</div>
-                                                    </div>
-                                                    <button class="add-basket">
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 17.426 13.695"
-                                                        >
-                                                            <path
-                                                                d="M17.388 3.087 15.361 9.47a1.074 1.074 0 0 1-1.023.758H6.516a1.117 1.117 0 0 1-1.042-.7L2.481 1.515H.758A.758.758 0 0 1 .758 0h2.254a.776.776 0 0 1 .72.511l3.087 8.2h7.2l1.61-5.114H6.705a.758.758 0 1 1 0-1.515h9.963a.753.753 0 0 1 .606.322.735.735 0 0 1 .114.683ZM6.895 11.232a1.229 1.229 0 1 0 .871.36 1.249 1.249 0 0 0-.871-.36Zm6.8 0a1.229 1.229 0 1 0 .871.36 1.249 1.249 0 0 0-.871-.36Z"
-                                                            />
-                                                        </svg>
-                                                        Add to cart
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <div class="product-card">
-                                                    <a href="product-detail.html">
-                                                        <div class="product-image">
-                                                            <img
-                                                                src="front/images/product20-300x300.jpg"
-                                                                alt=""
-                                                            />
-                                                        </div>
-                                                    </a>
-
-                                                    <div class="product-cat">
-                                                        <a href="">Vitamins</a>
-                                                        <a href="">Herbs</a>
-                                                    </div>
-                                                    <a
-                                                        href="product-detail.html"
-                                                        class="product-name"
-                                                    >
-                                                        Vitamin C 500mg Sugarless Tab X
-                                                    </a>
-                                                    <div class="price">
-                                                        <div class="old-price">$15.00</div>
-                                                        <span>-</span>
-                                                        <div class="new-price">$ 10.00</div>
-                                                    </div>
-                                                    <button class="add-basket">
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 17.426 13.695"
-                                                        >
-                                                            <path
-                                                                d="M17.388 3.087 15.361 9.47a1.074 1.074 0 0 1-1.023.758H6.516a1.117 1.117 0 0 1-1.042-.7L2.481 1.515H.758A.758.758 0 0 1 .758 0h2.254a.776.776 0 0 1 .72.511l3.087 8.2h7.2l1.61-5.114H6.705a.758.758 0 1 1 0-1.515h9.963a.753.753 0 0 1 .606.322.735.735 0 0 1 .114.683ZM6.895 11.232a1.229 1.229 0 1 0 .871.36 1.249 1.249 0 0 0-.871-.36Zm6.8 0a1.229 1.229 0 1 0 .871.36 1.249 1.249 0 0 0-.871-.36Z"
-                                                            />
-                                                        </svg>
-                                                        Add to cart
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <div class="product-card">
-                                                    <a href="product-detail.html">
-                                                        <div class="product-image">
-                                                            <img
-                                                                src="front/images/product20-300x300.jpg"
-                                                                alt=""
-                                                            />
-                                                        </div>
-                                                    </a>
-
-                                                    <div class="product-cat">
-                                                        <a href="">Vitamins</a>
-                                                        <a href="">Herbs</a>
-                                                    </div>
-                                                    <a
-                                                        href="product-detail.html"
-                                                        class="product-name"
-                                                    >
-                                                        Vitamin C 500mg Sugarless Tab X
-                                                    </a>
-                                                    <div class="price">
-                                                        <div class="old-price">$15.00</div>
-                                                        <span>-</span>
-                                                        <div class="new-price">$ 10.00</div>
-                                                    </div>
-                                                    <button class="add-basket">
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 17.426 13.695"
-                                                        >
-                                                            <path
-                                                                d="M17.388 3.087 15.361 9.47a1.074 1.074 0 0 1-1.023.758H6.516a1.117 1.117 0 0 1-1.042-.7L2.481 1.515H.758A.758.758 0 0 1 .758 0h2.254a.776.776 0 0 1 .72.511l3.087 8.2h7.2l1.61-5.114H6.705a.758.758 0 1 1 0-1.515h9.963a.753.753 0 0 1 .606.322.735.735 0 0 1 .114.683ZM6.895 11.232a1.229 1.229 0 1 0 .871.36 1.249 1.249 0 0 0-.871-.36Zm6.8 0a1.229 1.229 0 1 0 .871.36 1.249 1.249 0 0 0-.871-.36Z"
-                                                            />
-                                                        </svg>
-                                                        Add to cart
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <div class="product-card">
-                                                    <a href="product-detail.html">
-                                                        <div class="product-image">
-                                                            <img
-                                                                src="front/images/product20-300x300.jpg"
-                                                                alt=""
-                                                            />
-                                                        </div>
-                                                    </a>
-
-                                                    <div class="product-cat">
-                                                        <a href="">Vitamins</a>
-                                                        <a href="">Herbs</a>
-                                                    </div>
-                                                    <a
-                                                        href="product-detail.html"
-                                                        class="product-name"
-                                                    >
-                                                        Vitamin C 500mg Sugarless Tab X
-                                                    </a>
-                                                    <div class="price">
-                                                        <div class="old-price">$15.00</div>
-                                                        <span>-</span>
-                                                        <div class="new-price">$ 10.00</div>
-                                                    </div>
-                                                    <button class="add-basket">
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 17.426 13.695"
-                                                        >
-                                                            <path
-                                                                d="M17.388 3.087 15.361 9.47a1.074 1.074 0 0 1-1.023.758H6.516a1.117 1.117 0 0 1-1.042-.7L2.481 1.515H.758A.758.758 0 0 1 .758 0h2.254a.776.776 0 0 1 .72.511l3.087 8.2h7.2l1.61-5.114H6.705a.758.758 0 1 1 0-1.515h9.963a.753.753 0 0 1 .606.322.735.735 0 0 1 .114.683ZM6.895 11.232a1.229 1.229 0 1 0 .871.36 1.249 1.249 0 0 0-.871-.36Zm6.8 0a1.229 1.229 0 1 0 .871.36 1.249 1.249 0 0 0-.871-.36Z"
-                                                            />
-                                                        </svg>
-                                                        Add to cart
-                                                    </button>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -474,93 +281,67 @@
 <div class="mobile-header">
     <nav>
         <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
-            <button
-                class="nav-link active"
-                id="nav-home-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#nav-home"
-                type="button"
-                role="tab"
-                aria-controls="nav-home"
-                aria-selected="true"
-            >
+            <button class="nav-link active" id="nav-menu-tab" data-bs-toggle="tab" data-bs-target="#nav-menu"
+                    type="button" role="tab" aria-controls="nav-menu" aria-selected="true">
                 Menu
             </button>
-            <button
-                class="nav-link"
-                id="nav-profile-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#nav-profile"
-                type="button"
-                role="tab"
-                aria-controls="nav-profile"
-                aria-selected="false"
-            >
+            <button class="nav-link" id="nav-shop-tab" data-bs-toggle="tab" data-bs-target="#nav-shop"
+                    type="button" role="tab" aria-controls="nav-shop" aria-selected="false">
                 Shop
             </button>
         </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
-        <div
-            class="tab-pane fade active show"
-            id="nav-menu"
-            role="tabpanel"
-            aria-labelledby="nav-menu-tab"
-        >
+        <div class="tab-pane fade active show" id="nav-menu" role="tabpanel" aria-labelledby="nav-menu-tab">
             <ul class="list">
                 <li>
-                    <a href="">Home</a>
+                    <a href="{{ route('home') }}">Home</a>
                 </li>
                 <li>
-                    <a href="">Blog</a>
+                    <a href="{{ route('blog.index') }}">Blog</a>
                 </li>
                 <li>
-                    <a href="">Contact</a>
+                    <a href="{{ route('contact') }}">Contact</a>
                 </li>
                 <li>
-                    <a href="">About us</a>
+                    <a href="{{ route('about') }}">About us</a>
                 </li>
             </ul>
         </div>
-        <div
-            class="tab-pane fade"
-            id="nav-shop"
-            role="tabpanel"
-            aria-labelledby="nav-shop-tab"
-        >
+        <div class="tab-pane fade" id="nav-shop" role="tabpanel" aria-labelledby="nav-shop-tab">
             <ul class="list">
                 <li><a href="">Allergiya Paketləri </a></li>
-                <li><a href=""> Genetik paketlər </a></li>
-                <li><a href=""> Kişilər üçün </a></li>
-                <li><a href=""> Qadınlar üçün </a></li>
-                <li><a href=""> Ümumi check up</a></li>
-                <li><a href=""> Hədiyyə kartları</a></li>
             </ul>
         </div>
     </div>
     <div class="call-btn">
-        <a href="tel:43434"
-        ><img src="front/images/icons/phone.svg" alt="phone"
-            />43434</a>
+        <a href="tel:{{ $contact->phone }}">
+            <img src="{{ asset("front/images/icons/phone.svg")}}" alt="phone"/>
+            {{ $contact->phone }}
+        </a>
     </div>
     <div class="language-switcher">
         <div class="language-toggle">
-          <span class="current-language">En <svg xmlns="http://www.w3.org/2000/svg" fill="#fff"
-                                                 viewBox="0 0 451.847 451.847"><path d="M225.923 354.706c-8.098 0-16.195-3.092-22.369-9.263L9.27
-            151.157c-12.359-12.359-12.359-32.397 0-44.751 12.354-12.354 32.388-12.354 44.748 0l171.905 171.915 171.906-171.909c12.359-12.354 32.391-12.354 44.744 0 12.365 12.354 12.365 32.392 0 44.751L248.292 345.449c-6.177 6.172-14.274 9.257-22.369 9.257z"></path></svg></span>
-            <img class="arrow-language" src="front/images/icons/arrow-down.svg" alt="arrow">
+          <span class="current-language">En
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#fff"
+                   viewBox="0 0 451.847 451.847">
+                  <path d="M225.923 354.706c-8.098 0-16.195-3.092-22.369-9.263L9.27
+            151.157c-12.359-12.359-12.359-32.397 0-44.751 12.354-12.354 32.388-12.354 44.748 0l171.905 171.915 171.906-171.909c12.359-12.354 32.391-12.354 44.744 0 12.365 12.354 12.365 32.392 0 44.751L248.292 345.449c-6.177 6.172-14.274 9.257-22.369 9.257z"></path>
+              </svg>
+          </span>
+            <img class="arrow-language" src="{{ asset("front/images/icons/arrow-down.svg")}}" alt="arrow"/>
         </div>
         <div class="language-box box">
             <ul class="language-switcher-content">
                 <li>
                     <a href="">
-                        <img src="front/images/icons/az.png" alt="az flag">
+                        <img src="{{ asset("front/images/icons/az.png")}}" alt="az flag">
                         <span>Azerbaijan</span>
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <img src="front/images/icons/en.svg" alt="en flag">
+                        <img src="{{ asset("front/images/icons/en.svg")}}" alt="en flag">
                         <span>English</span>
                     </a>
                 </li>

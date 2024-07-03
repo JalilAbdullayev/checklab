@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Blog\BlogCategoryController;
 use App\Http\Controllers\Blog\BlogController;
 use App\Http\Controllers\Blog\BlogTagController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\HomeController;
@@ -28,6 +29,15 @@ Route::prefix('blog')->name('blog.')->group(function() {
 });
 
 Route::get('product/{slug}', [FrontController::class, 'productDetail'])->name('product');
+
+Route::prefix('cart')->name('cart.')->group(function() {
+    Route::get('/', [CartController::class, 'index'])->name('index');
+    Route::post('store/{id}', [CartController::class, 'store'])->name('store');
+    Route::get('delete/{id}', [CartController::class, 'delete'])->name('delete');
+    Route::post('update/{id}', [CartController::class, 'update'])->name('update');
+    Route::get('empty', [CartController::class, 'empty'])->name('empty');
+    Route::post('submit', [CartController::class, 'submit'])->name('submit');
+});
 
 Route::prefix('contact')->name('contact')->group(function() {
     Route::get('/', [FrontController::class, 'contact']);

@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Facades\Storage; @endphp
 @extends('front.master')
 @section('title', 'Səbət')
 @section('content')
@@ -45,34 +46,72 @@
                                 <th class="pr-subtotal">
                                     <span>subtotal</span>
                                 </th>
+                                <th>
+                                    <span class="screen-reader-text">update</span>
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    <span class="pr_remove"> x</span>
-                                </td>
-                                <td>
-                                    <div class="pr-img">
-                                        <a href="">
-                                            <img
-                                                src="https://enovathemes.com/propharm/wp-content/uploads/product8-300x300.jpg"
-                                                alt="pr img"
-                                            /></a>
-                                    </div>
-                                </td>
-                                <td><a href="" class="pr_name">Own Vitamin B1 250mg Tab X 75</a></td>
-                                <td class="pr_price">33 azn</td>
-                                <td>
-                                    <input type="number" value="1" class="pr_quantity">
-                                </td>
-                                <td class="pr_price">323 m</td>
-
-                            </tr>
+                            @foreach($data as $item)
+                                @foreach($item->products as $product)
+                                    <tr>
+                                        <td>
+                                            <a href="{{ route('cart.delete', $product->id) }}" class="pr_remove"> x</a>
+                                        </td>
+                                        <td>
+                                            <div class="pr-img">
+                                                <a href="{{ route('product', $product->slug) }}">
+                                                    <img src="{{ Storage::url($product->image) }}"
+                                                         alt="{{ $product->title }}"/>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td><a href="{{ route('product', $product->slug) }}" class="pr_name">
+                                                {{ $product->title }}
+                                            </a></td>
+                                        <td class="pr_price">
+                                            @if($product->discount)
+                                                {{ $product->price - ($product->price * $product->discount) / 100 }}
+                                            @else
+                                                {{ $product->price }}
+                                            @endif ₼
+                                        </td>
+                                        <td>
+                                            <form action="{{ route('cart.update', $product->id) }}" method="POST"
+                                                  id="update-{{ $product->id }}">
+                                                @csrf
+                                                <input type="number" name="quantity" min="1"
+                                                       max="{{ $product->quantity }}" value="@php
+                                $cartProduct = $item->cart_products->where('product_id', $product->id)->first();
+                                echo $cartProduct ? $cartProduct->quantity : 0;
+                            @endphp" class="pr_quantity"/>
+                                            </form>
+                                            @if(session('error'))
+                                                <div class="alert alert-danger mt-3">
+                                                    {{ session('error') }}
+                                                </div>
+                                            @endif
+                                        </td>
+                                        <td class="pr_price">@if($product->discount)
+                                                {{ $cartProduct->quantity * ($product->price - (($product->price * $product->discount) / 100)) }}
+                                            @else
+                                                {{ $cartProduct->quantity * $product->price }}
+                                            @endif ₼
+                                        </td>
+                                        <td>
+                                            <div class="cart-footer mt-0">
+                                                <button class="update-btn"
+                                                        onclick="$('#update-{{ $product->id }}').submit()">
+                                                    Update
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
-
                     <div class="cart-footer">
                         <div class="add-cupon">
                             <form action="">
@@ -80,41 +119,25 @@
                                 <button>apply coupon</button>
                             </form>
                         </div>
-                        <button class="update-btn"> Update cart</button>
+                        <a href="{{ route('cart.empty') }}" class="update-btn bg-danger"> Empty cart</a>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="cart-totals">
                         <div class="cart-totals-title">cart totals</div>
                         <div class="cart-totals-content">
-                            <table
-                                cellspacing="0"
-                                class="shop_table shop_table_responsive"
-                            >
+                            <table cellspacing="0" class="shop_table shop_table_responsive">
                                 <tbody>
-                                <tr class="cart-subtotal">
-                                    <th>Subtotal</th>
-                                    <td data-title="Subtotal">
-                          <span class="amount">
-                            <span class="symbol">$</span>31.00
-                          </span>
-                                    </td>
-                                </tr>
-
                                 <tr class="order-total">
                                     <th>Total</th>
                                     <td data-title="Total">
-                                        <strong
-                                        ><span class="amount"
-                                            ><span class="symbol">$</span>31.00</span
-                                            ></strong
-                                        >
+                                        <strong><span class="amount"><span class="symbol">$</span>
+                                            {{ $total }}</span></strong>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
-                            <a href="" class="checkout-btn">Checkout</a>
-                            <a href="" class="forward-btn">Continue shopping</a>
+                                <a href="" class="checkout-btn">Checkout</a>
                         </div>
                     </div>
                 </div>

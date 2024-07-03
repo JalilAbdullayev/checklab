@@ -49,21 +49,29 @@
                         </div>
                     </div>
                     <div class="details">
-                        <div class="d-flex gap-3">
-                            <div class="counter">
-                                <button class="dec">-</button>
-                                <input type="number" value="1" min="0" max="{{ $product->quantity }}"
-                                       maxlength="{{ Str::length($product->quantity)}}"/>
-                                <button class="inc">+</button>
+                        <form action="{{ route('cart.store', $product->id) }}" method="POST">
+                            @csrf
+                            <div class="d-flex gap-3">
+                                <div class="counter">
+                                    <button type="button" class="dec">-</button>
+                                    <input type="number" value="1" min="0" max="{{ $product->quantity }}"
+                                           name="quantity" maxlength="{{ Str::length($product->quantity)}}"/>
+                                    <button type="button" class="inc">+</button>
+                                </div>
+                                <button type="submit" class="add-to-cart">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.426 13.695">
+                                        <path
+                                            d="M17.388 3.087 15.361 9.47a1.074 1.074 0 0 1-1.023.758H6.516a1.117 1.117 0 0 1-1.042-.7L2.481 1.515H.758A.758.758 0 0 1 .758 0h2.254a.776.776 0 0 1 .72.511l3.087 8.2h7.2l1.61-5.114H6.705a.758.758 0 1 1 0-1.515h9.963a.753.753 0 0 1 .606.322.735.735 0 0 1 .114.683ZM6.895 11.232a1.229 1.229 0 1 0 .871.36 1.249 1.249 0 0 0-.871-.36Zm6.8 0a1.229 1.229 0 1 0 .871.36 1.249 1.249 0 0 0-.871-.36Z"/>
+                                    </svg>
+                                    Add to cart
+                                </button>
                             </div>
-                            <button class="add-to-cart">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.426 13.695">
-                                    <path
-                                        d="M17.388 3.087 15.361 9.47a1.074 1.074 0 0 1-1.023.758H6.516a1.117 1.117 0 0 1-1.042-.7L2.481 1.515H.758A.758.758 0 0 1 .758 0h2.254a.776.776 0 0 1 .72.511l3.087 8.2h7.2l1.61-5.114H6.705a.758.758 0 1 1 0-1.515h9.963a.753.753 0 0 1 .606.322.735.735 0 0 1 .114.683ZM6.895 11.232a1.229 1.229 0 1 0 .871.36 1.249 1.249 0 0 0-.871-.36Zm6.8 0a1.229 1.229 0 1 0 .871.36 1.249 1.249 0 0 0-.871-.36Z"/>
-                                </svg>
-                                Add to cart
-                            </button>
-                        </div>
+                        </form>
+                        @if(session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                     </div>
                     <div class="details-2">
                         <ul>
