@@ -10,29 +10,24 @@
         @yield('title') | {{ $settings->title }}
     </title>
     <link rel="shortcut icon" href="{{ asset("storage/" . $settings->favicon) }}"/>
-    <link rel="stylesheet" href="{{ asset("front/swiper/swiper.min.css") }}"/>
-    <link rel="stylesheet" href="{{ asset("front/bootstrap/css/bootstrap.min.css") }}"/>
-    <link rel="stylesheet" href="{{ asset("front/css/reset.css") }}"/>
-    <link rel="stylesheet" href="{{ asset("front/css/global.css") }}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
-    <link rel="stylesheet" href="{{ asset("front/css/main.css") }}"/>
-    <link rel="stylesheet" href="{{ asset("front/css/mobile.css") }}"/>
+    @vite(['public/front/swiper/swiper.min.css',
+'public/front/bootstrap/css/bootstrap.min.css',
+'public/front/css/reset.css',
+'public/front/css/global.css',
+'public/front/css/main.css',
+'public/front/css/mobile.css',])
     @yield('css')
 </head>
 <body>
 <div class="search-box">
     <button class="search-box-toggle">
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="close"
-            viewBox="0 0 47.971 47.971"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" class="close" viewBox="0 0 47.971 47.971">
             <path
                 d="M28.228,23.986L47.092,5.122c1.172-1.171,1.172-3.071,0-4.242c-1.172-1.172-3.07-1.172-4.242,0L23.986,19.744L5.121,0.88
           c-1.172-1.172-3.07-1.172-4.242,0c-1.172,1.171-1.172,3.071,0,4.242l18.865,18.864L0.879,42.85c-1.172,1.171-1.172,3.071,0,4.242
           C1.465,47.677,2.233,47.97,3,47.97s1.535-0.293,2.121-0.879l18.865-18.864L42.85,47.091c0.586,0.586,1.354,0.879,2.121,0.879
-          s1.535-0.293,2.121-0.879c1.172-1.171,1.172-3.071,0-4.242L28.228,23.986z"
-            ></path>
+          s1.535-0.293,2.121-0.879c1.172-1.171,1.172-3.071,0-4.242L28.228,23.986z"></path>
         </svg>
     </button>
     <form action="" class="search-form">
@@ -44,6 +39,7 @@
         <input type="text" placeholder="Nə axtarırsınız?"/>
         <button class="search-btn">Search</button>
     </form>
+    *
 </div>
 
 <header class="header">
@@ -62,7 +58,7 @@
                             <span class="current-language">En</span>
                             <img
                                 class="arrow-language"
-                                src="front/images/icons/arrow-down.svg"
+                                src="{{ asset("front/images/icons/arrow-down.svg") }}"
                                 alt="arrow"
                             />
                         </div>
@@ -70,13 +66,13 @@
                             <ul class="language-switcher-content">
                                 <li>
                                     <a href="">
-                                        <img src="front/images/icons/az.png" alt="az flag"/>
+                                        <img src="{{ asset("front/images/icons/az.png")}}" alt="az flag"/>
                                         <span>Azerbaijan</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="">
-                                        <img src="front/images/icons/en.svg" alt="en flag"/>
+                                        <img src="{{ asset("front/images/icons/en.svg")}}" alt="en flag"/>
                                         <span>English</span>
                                     </a>
                                 </li>
@@ -108,12 +104,12 @@
                                 <input type="text" placeholder="Axtardığınız sözü yazın"/>
                                 <img
                                     class="loader"
-                                    src="front/images/icons/loader.svg"
+                                    src="{{ asset("front/images/icons/loader.svg")}}"
                                     alt="loader"
                                 />
                                 <button type="submit" class="input-after-btn">
                                     <img
-                                        src="front/images/icons/search.svg"
+                                        src="{{ asset("front/images/icons/search.svg")}}"
                                         alt="search"
                                     />
                                 </button>
@@ -130,7 +126,7 @@
                     </div>
                 </div>
                 <div class="call">
-                    <img src="front/images/icons/phone.svg" alt="phone"/>
+                    <img src="{{ asset("front/images/icons/phone.svg")}}" alt="phone"/>
                     <a class="tel" href="tel:{{ $contact->phone }}">
                         {{ $contact->phone }}
                     </a>
@@ -156,13 +152,9 @@
                 <div class="col-lg-2">
                     <div class="category">
                         <div class="category-toggle">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 14.678 13.21"
-                            >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.678 13.21">
                                 <path
-                                    d="M13.944 1.468H.734A.734.734 0 1 1 .734 0h13.21a.734.734 0 0 1 0 1.468ZM9.064 4.66a.736.736 0 0 0-.734-.734H.73a.734.734 0 0 0 0 1.468h7.6a.736.736 0 0 0 .734-.734ZM11.3 8.568a.736.736 0 0 0-.734-.734H.734a.734.734 0 1 0 0 1.468h9.834a.736.736 0 0 0 .732-.734Zm2.715 3.908a.736.736 0 0 0-.734-.734H.789a.734.734 0 1 0 0 1.468h12.494a.736.736 0 0 0 .734-.734Z"
-                                ></path>
+                                    d="M13.944 1.468H.734A.734.734 0 1 1 .734 0h13.21a.734.734 0 0 1 0 1.468ZM9.064 4.66a.736.736 0 0 0-.734-.734H.73a.734.734 0 0 0 0 1.468h7.6a.736.736 0 0 0 .734-.734ZM11.3 8.568a.736.736 0 0 0-.734-.734H.734a.734.734 0 1 0 0 1.468h9.834a.736.736 0 0 0 .732-.734Zm2.715 3.908a.736.736 0 0 0-.734-.734H.789a.734.734 0 1 0 0 1.468h12.494a.736.736 0 0 0 .734-.734Z"></path>
                             </svg>
                             All categories
                         </div>
@@ -189,13 +181,10 @@
                 <div class="col-lg-2">
                     <div class="actions">
                         <a href="wishlist.html" class="wishlist-btn">
-                            <img
-                                src="front/images/icons/wishlist.svg"
-                                alt="wishlist"
-                            />
+                            <img src="{{ asset("front/images/icons/wishlist.svg")}}" alt="wishlist"/>
                         </a>
                         <a href="c" class="basket-btn">
-                            <img src="front/images//icons/cart.svg" alt="cart"/>
+                            <img src="{{ asset("front/images/icons/cart.svg")}}" alt="cart"/>
                             <span class="count">1</span>
                         </a>
                     </div>
@@ -687,7 +676,6 @@
         </div>
     </div>
 </footer>
-
 <script src="{{ asset("front/jquery/jquery.min.js") }}"></script>
 <script src="{{ asset("front/bootstrap/js/bootstrap.min.js") }}"></script>
 <script src="{{ asset("front/swiper/swiper-bundle.min.js") }}"></script>

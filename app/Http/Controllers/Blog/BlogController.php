@@ -6,16 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\BlogRequest;
 use App\Models\Blog;
 use App\Models\BlogCategory;
-use App\Models\BlogImage;
 use App\Models\BlogTag;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class BlogController extends Controller {
     public function index() {
         $data = Blog::all();
-        $category = BlogCategory::all();
-        return view('admin.blog.index', compact('data', 'category'));
+        return view('admin.blog.index', compact('data'));
     }
 
     public function create() {
@@ -71,8 +70,17 @@ class BlogController extends Controller {
             Storage::putFileAs('public/blog/', $file, $fileOriginalName);
             $blog->image = 'blog/' . $fileOriginalName;
         }
-        $blog->tags()->sync($request->tags);
         $blog->save();
+        $blog->tags()->sync($request->tags);
         return redirect()->route('admin.blog.index');
+    }
+
+    public function delete($id) {
+        $blog = Blog::findOrFail($id);
+        if($blog->image && Storage::exists('public/' . $blog->image)) {
+            Storage::delete('public/' . $blog->image);
+        }
+        $blog->delete();
+        return Redirect::route('admin.blog.index');
     }
 }

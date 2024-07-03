@@ -107,6 +107,36 @@
                         </li>
                     </ul>
                 </li>
+                <li>
+                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                        <i class="icon-bag"></i>
+                        <span class="hide-menu">
+                            Məhsullar
+                        </span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li>
+                            <a href="{{ route('admin.products.index') }}">
+                                Məhsullar
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.products.create') }}">
+                                Yeni Məhsul
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.products.category.index') }}">
+                                Kateqoriyalar
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.products.tag.index') }}">
+                                Teqlər
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

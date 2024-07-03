@@ -92,7 +92,7 @@
         $('.btn-outline-danger').click(function() {
             let id = $(this).closest('tr').attr('id');
             $.ajax({
-                url: '{{ route('admin.messages.delete', ':id') }}'.replace(':id', id),
+                url: '{{ route('admin.blog.delete', ':id') }}'.replace(':id', id),
                 async: false,
                 success: function() {
                     $('tr#' + id + '').remove();

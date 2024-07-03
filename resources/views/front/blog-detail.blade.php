@@ -1,6 +1,6 @@
 @php use Carbon\Carbon; @endphp
 @extends('front.master')
-@section('title', 'Blog Detail')
+@section('title', $blog->title)
 @section('css')
 	<style>
         .blog-detail-image img, .blog-item-image img {
