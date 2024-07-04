@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Add New User')
+@section('title', 'Yeni İstifadəçi')
 @section('content')
     <!-- ============================================================== -->
     <!-- Bread crumb and right sidebar toggle -->
@@ -7,7 +7,7 @@
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
             <h4 class="text-white-50">
-                Add New User
+                @yield('title')
             </h4>
         </div>
         <div class="col-md-7 align-self-center text-end">
@@ -15,16 +15,16 @@
                 <ol class="breadcrumb justify-content-end">
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.index') }}">
-                            Home
+                            Ana Səhifə
                         </a>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.users.index') }}">
-                            Users
+                            İstifadəçilər
                         </a>
                     </li>
                     <li class="breadcrumb-item active">
-                        Add
+                        @yield('title')
                     </li>
                 </ol>
             </div>
@@ -37,10 +37,10 @@
         @csrf
         <div class="card-body">
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="name" id="name" placeholder="Name" maxlength="255"
+                <input type="text" class="form-control" name="name" id="name" placeholder="Ad" maxlength="255"
                        required/>
                 <label for="name" class="form-label text-white-50">
-                    Name
+                    Ad
                 </label>
             </div>
             @error('name')
@@ -57,10 +57,10 @@
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             <div class="form-floating mb-3">
-                <input type="password" class="form-control" name="password" id="password" placeholder="Password"
+                <input type="password" class="form-control" name="password" id="password" placeholder="Şifrə"
                        maxlength="255" required autocomplete="new-password"/>
                 <label for="password" class="form-label text-white-50">
-                    Password
+                    Şifrə
                 </label>
             </div>
             @error('password')
@@ -68,9 +68,9 @@
             @enderror
             <div class="form-floating mb-3">
                 <input type="password" class="form-control" name="password_confirmation" id="password-confirm"
-                       placeholder="Confirm Password" required maxlength="255" autocomplete="new-password"/>
+                       placeholder="Şifrə Təkrar" required maxlength="255" autocomplete="new-password"/>
                 <label for="password-confirm" class="form-label text-white-50">
-                    Confirm Password
+                    Şifrə Təkrar
                 </label>
             </div>
             @error('password_confirm')
@@ -88,7 +88,7 @@
                         Moderator
                     </option>
                     <option value="2">
-                        Customer
+                        Müştəri
                     </option>
                 </select>
             </div>

@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Edit User')
+@section('title', 'İstifadəçi Redaktə')
 @section('content')
     <!-- ============================================================== -->
     <!-- Bread crumb and right sidebar toggle -->
@@ -7,7 +7,7 @@
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
             <h4 class="text-white-50">
-                Edit User
+                @yield('title')
             </h4>
         </div>
         <div class="col-md-7 align-self-center text-end">
@@ -15,16 +15,16 @@
                 <ol class="breadcrumb justify-content-end">
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.index') }}">
-                            Home
+                            Ana Səhifə
                         </a>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.users.index') }}">
-                            Users
+                            İstifadəçilər
                         </a>
                     </li>
                     <li class="breadcrumb-item active">
-                        Add
+                        @yield('title')
                     </li>
                 </ol>
             </div>
@@ -37,10 +37,10 @@
         @csrf
         <div class="card-body">
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="name" id="name" placeholder="Name" maxlength="255"
+                <input type="text" class="form-control" name="name" id="name" placeholder="Ad" maxlength="255"
                        value="{{ $user->name }}" required/>
                 <label for="name" class="form-label text-white-50">
-                    Name
+                    Ad
                 </label>
             </div>
             @error('name')
@@ -68,12 +68,12 @@
                         Moderator
                     </option>
                     <option value="2" @if($user->role == 2) selected @endif>
-                        Customer
+                        Müştəri
                     </option>
                 </select>
             </div>
             <button type="submit" class="btn w-100 btn-primary text-white">
-                Update
+                Saxla
             </button>
         </div>
     </form>

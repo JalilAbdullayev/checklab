@@ -50,13 +50,24 @@
                         </a>
                     </li>
                     <li>
-                        <a class="waves-effect waves-dark" href="{{ route('admin.users.index') }}"
-                           aria-expanded="false">
-                            <i class="ti-user"></i>
+                        <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                            <i class="mdi mdi-account-multiple"></i>
                             <span class="hide-menu">
                             İstifadəçilər
                         </span>
                         </a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li>
+                                <a href="{{ route('admin.users.index') }}">
+                                    İstifadəçilər
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.users.create') }}">
+                                    Yeni İstifadəçi
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 @endif
                 @if(Auth::user()->role < 2)
