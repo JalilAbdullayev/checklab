@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\AgeGroup;
 use App\Models\Contact;
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -26,11 +27,13 @@ class AppServiceProvider extends ServiceProvider {
         $contact = Contact::firstOrFail();
         $headSliders = Product::take(6)->get();
         $productCategories = ProductCategory::all();
+        $ages = AgeGroup::all();
         Paginator::useBootstrapFive();
 
         View::share('settings', $settings);
         View::share('contact', $contact);
         View::share('headSliders', $headSliders);
         View::share('productCategories', $productCategories);
+        View::share('ages', $ages);
     }
 }

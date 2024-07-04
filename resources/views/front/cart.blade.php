@@ -60,13 +60,13 @@
                                         </td>
                                         <td>
                                             <div class="pr-img">
-                                                <a href="{{ route('product', $product->slug) }}">
+                                                <a href="{{ route('product.index', $product->slug) }}">
                                                     <img src="{{ Storage::url($product->image) }}"
                                                          alt="{{ $product->title }}"/>
                                                 </a>
                                             </div>
                                         </td>
-                                        <td><a href="{{ route('product', $product->slug) }}" class="pr_name">
+                                        <td><a href="{{ route('product.index', $product->slug) }}" class="pr_name">
                                                 {{ $product->title }}
                                             </a></td>
                                         <td class="pr_price">

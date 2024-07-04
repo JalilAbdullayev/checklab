@@ -31,4 +31,8 @@ class Product extends Model {
         return $this->belongsToMany(ProductCategory::class, 'product_categories_products', 'product_id', 'product_category_id')
             ->withTimestamps();
     }
+
+    public function ages() {
+        return $this->belongsToMany(AgeGroup::class, 'products_age_groups', 'product_id', 'age_group_id')->withTimestamps();
+    }
 }

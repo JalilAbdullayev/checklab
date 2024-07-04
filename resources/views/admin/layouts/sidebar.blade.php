@@ -163,6 +163,11 @@
                                     Teqlər
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ route('admin.products.age-groups.index') }}">
+                                    Yaş Qrupları
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li>

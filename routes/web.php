@@ -10,6 +10,7 @@ use App\Http\Controllers\FrontController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Products\AgeGroupController;
 use App\Http\Controllers\Products\ProductCategoryController;
 use App\Http\Controllers\Products\ProductController;
 use App\Http\Controllers\Products\ProductTagController;
@@ -30,11 +31,16 @@ Route::controller(FrontController::class)->group(function() {
     Route::prefix('blog')->name('blog.')->group(function() {
         Route::get('/', 'blog')->name('index');
         Route::get('{slug}', 'blogDetail')->name('detail');
-        Route::get('category/{slug}', 'categories')->name('category');
-        Route::get('tag/{slug}', 'tags')->name('tag');
+        Route::get('category/{slug}', 'blogCategories')->name('category');
+        Route::get('tag/{slug}', 'blogTags')->name('tag');
     });
 
-    Route::get('product/{slug}', 'productDetail')->name('product');
+    Route::prefix('product')->name('product.')->group(function() {
+        Route::get('product/{slug}', 'productDetail')->name('index');
+        Route::get('category/{slug}', 'productCategories')->name('category');
+        Route::get('tag/{slug}', 'productTags')->name('tag');
+        Route::get('age/{slug}', 'ages')->name('age');
+    });
     Route::get('search', 'search')->name('search');
 });
 
@@ -166,6 +172,20 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function() {
                     Route::get('/', 'edit');
                     Route::post('/', 'update');
                 });
+                Route::get('delete/{id}', 'delete')->name('delete');
+            });
+
+            Route::prefix('age-groups')->name('age-groups.')->controller(AgeGroupController::class)->group(function() {
+                Route::prefix('/')->name('index')->group(function() {
+                    Route::get('/', 'index');
+                    Route::post('/', 'store');
+                });
+
+                Route::prefix('edit/{id}')->name('edit')->group(function() {
+                    Route::get('/', 'edit');
+                    Route::post('/', 'update');
+                });
+
                 Route::get('delete/{id}', 'delete')->name('delete');
             });
         });

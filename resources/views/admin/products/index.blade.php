@@ -52,6 +52,9 @@
 					Teqlər
 				</th>
 				<th>
+					Yaş Qrupları
+				</th>
+				<th>
 					Əməliyyatlar
 				</th>
 			</tr>
@@ -73,6 +76,9 @@
 					</td>
 					<td>
 						{{ $item->tags->pluck('title')->join(', ') }}
+					</td>
+					<td>
+						{{ $item->ages->pluck('title')->join(', ') }}
 					</td>
 					<td>
 						<a href="{{ route('admin.products.edit', $item->id) }}" class="btn btn-outline-warning">

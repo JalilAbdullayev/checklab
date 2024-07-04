@@ -49,36 +49,6 @@
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="brand" id="brand" placeholder="Brend" required
-                       maxlength="255"/>
-                <label for="brand" class="form-label text-white-50">
-                    Brend
-                </label>
-            </div>
-            @error('brand')
-            <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="form" id="form" placeholder="Forma" required
-                       maxlength="255"/>
-                <label for="form" class="form-label text-white-50">
-                    Forma
-                </label>
-            </div>
-            @error('form')
-            <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="color" id="color" placeholder="Rəng" required
-                       maxlength="255"/>
-                <label for="color" class="form-label text-white-50">
-                    Rəng
-                </label>
-            </div>
-            @error('color')
-            <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-            <div class="form-floating mb-3">
                 <input type="number" class="form-control" name="price" id="price" placeholder="Qiymət" required
                        min="0"/>
                 <label for="price" class="form-label text-white-50">
@@ -92,20 +62,10 @@
                 <input type="number" class="form-control" name="discount" id="discount" placeholder="Endirim" min="0"
                        max="100" maxlength="3"/>
                 <label for="discount" class="form-label text-white-50">
-                    Endirim
+                    Endirimli qiymət
                 </label>
             </div>
             @error('discount')
-            <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-            <div class="form-floating mb-3">
-                <input type="number" class="form-control" name="quantity" id="quantity" placeholder="Say" required
-                       min="0"/>
-                <label for="quantity" class="form-label text-white-50">
-                    Say
-                </label>
-            </div>
-            @error('quantity')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             <div class="form-floating mb-3">
@@ -149,9 +109,18 @@
                     @endforeach
                 </select>
             </div>
-            @error('tags')
-            <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
+            <div class="mb-3">
+                <label for="ages" class="form-label text-white-50">
+                    Yaş qrupları
+                </label>
+                <select class="select2 select2 w-100" name="ages[]" id="ages" multiple>
+                    @foreach($ages as $age)
+                        <option value="{{ $age->id }}">
+                            {{ $age->title }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
             <div class="mb-3">
                 <label for="image" class="form-label text-white-50">
                     Şəkil

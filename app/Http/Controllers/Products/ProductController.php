@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Products;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
+use App\Models\AgeGroup;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductTag;
@@ -22,7 +23,8 @@ class ProductController extends Controller {
     public function create(): Viewable {
         $categories = ProductCategory::all();
         $tags = ProductTag::all();
-        return View::make('admin.products.create', compact('categories', 'tags'));
+        $ages = AgeGroup::all();
+        return View::make('admin.products.create', compact('categories', 'tags', 'ages'));
     }
 
     public function store(ProductRequest $request) {
@@ -31,10 +33,6 @@ class ProductController extends Controller {
         $product->slug = Str::slug($request->title);
         $product->price = $request->price;
         $product->discount = $request->discount;
-        $product->brand = $request->brand;
-        $product->form = $request->form;
-        $product->color = $request->color;
-        $product->quantity = $request->quantity;
         $product->description = $request->description;
         $product->text = $request->text;
         if($request->file('image')) {
@@ -49,6 +47,7 @@ class ProductController extends Controller {
         $product->save();
         $product->tags()->sync($request->tags);
         $product->categories()->sync($request->categories);
+        $product->ages()->sync($request->ages);
         return Redirect::route('admin.products.index');
     }
 
@@ -56,7 +55,8 @@ class ProductController extends Controller {
         $product = Product::findOrFail($id);
         $categories = ProductCategory::all();
         $tags = ProductTag::all();
-        return View::make('admin.products.edit', compact('product', 'categories', 'tags'));
+        $ages = AgeGroup::all();
+        return View::make('admin.products.edit', compact('product', 'categories', 'tags', 'ages'));
     }
 
     public function update(ProductRequest $request, $id) {
@@ -65,10 +65,6 @@ class ProductController extends Controller {
         $product->slug = Str::slug($request->title);
         $product->price = $request->price;
         $product->discount = $request->discount;
-        $product->brand = $request->brand;
-        $product->form = $request->form;
-        $product->color = $request->color;
-        $product->quantity = $request->quantity;
         $product->description = $request->description;
         $product->text = $request->text;
         if($request->file('image')) {
@@ -86,6 +82,7 @@ class ProductController extends Controller {
         $product->save();
         $product->tags()->sync($request->tags);
         $product->categories()->sync($request->categories);
+        $product->ages()->sync($request->ages);
         return Redirect::route('admin.products.index');
     }
 
@@ -94,6 +91,9 @@ class ProductController extends Controller {
         if($product->image && Storage::exists('public/' . $product->image)) {
             Storage::delete('public/' . $product->image);
         }
+        $product->tags()->detach();
+        $product->categories()->detach();
+        $product->ages()->detach();
         $product->delete();
         return Redirect::route('admin.products.index');
     }
