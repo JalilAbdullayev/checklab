@@ -12,7 +12,7 @@
                     </a>
                     <div class="dropdown-menu animated flipInY">
                         <!-- text-->
-                        <a href="javascript:void(0)" class="dropdown-item">
+                        <a href="{{ route('admin.profile.index') }}" class="dropdown-item">
                             <i class="ti-user"></i> Profil
                         </a>
                         <!-- text-->
@@ -46,6 +46,15 @@
                             <i class="icons-Gears"></i>
                             <span class="hide-menu">
                             Parametrlər
+                        </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect waves-dark" href="{{ route('admin.users.index') }}"
+                           aria-expanded="false">
+                            <i class="ti-user"></i>
+                            <span class="hide-menu">
+                            İstifadəçilər
                         </span>
                         </a>
                     </li>

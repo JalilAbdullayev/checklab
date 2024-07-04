@@ -34,7 +34,7 @@
         <div class="card-body">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" name="title" id="title" placeholder="Ad" required
-                       maxlength="255" value="{{ $tag->title }}"/>
+                       maxlength="255" value="{{ $tag->title }}" autofocus/>
                 <label for="title" class="form-label text-white-50">
                     Ad
                 </label>

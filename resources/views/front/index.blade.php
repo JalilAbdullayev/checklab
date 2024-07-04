@@ -43,9 +43,11 @@
                     @foreach($categories as $category)
                         <div class="swiper-slide">
                             <a href="" class="slider-item">
-                                <div class="category-img">
-                                    <img src="{{ Storage::url($category->icon) }}" alt="category"/>
-                                </div>
+                                @if($category->icon)
+                                    <div class="category-img">
+                                        <img src="{{ Storage::url($category->icon) }}" alt="category"/>
+                                    </div>
+                                @endif
                                 <div class="category-name">
                                     {{ $category->title }}
                                 </div>
@@ -163,7 +165,7 @@
             <div class="section-title">popular categories</div>
             <nav>
                 <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
-                    @foreach($categories as $category)
+                    @foreach($categories->take(6) as $category)
                         <button class="nav-link @if($loop->first) active @endif" id="nav-home-tab" data-bs-toggle="tab"
                                 data-bs-target="#{{ $category->slug }}" type="button" role="tab"
                                 aria-controls="nav-home"

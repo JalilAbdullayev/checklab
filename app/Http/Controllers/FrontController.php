@@ -25,7 +25,7 @@ class FrontController extends Controller {
     }
 
     public function blog(): Viewable {
-        $blogs = Blog::all();
+        $blogs = Blog::paginate(9);
         return View::make('front.blog', compact('blogs'));
     }
 
@@ -57,5 +57,11 @@ class FrontController extends Controller {
 
     public function contact(): Viewable {
         return View::make('front.contact');
+    }
+
+    public function search() {
+        $category = ProductCategory::whereId(request('category'))->firstOrFail();
+        $blogs = $category->products()->where('title', 'like', '%' . request('search') . '%')->paginate(9);
+        return View::make('front.blog', compact('blogs'));
     }
 }

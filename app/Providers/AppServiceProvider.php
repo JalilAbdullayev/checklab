@@ -3,7 +3,11 @@
 namespace App\Providers;
 
 use App\Models\Contact;
+use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\Settings;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider {
@@ -20,8 +24,13 @@ class AppServiceProvider extends ServiceProvider {
     public function boot(): void {
         $settings = Settings::firstOrFail();
         $contact = Contact::firstOrFail();
+        $headSliders = Product::take(6)->get();
+        $productCategories = ProductCategory::all();
+        Paginator::useBootstrapFive();
 
-        view()->share('settings', $settings);
-        view()->share('contact', $contact);
+        View::share('settings', $settings);
+        View::share('contact', $contact);
+        View::share('headSliders', $headSliders);
+        View::share('productCategories', $productCategories);
     }
 }
