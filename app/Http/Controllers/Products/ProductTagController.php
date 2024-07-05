@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 class ProductTagController extends Controller {
     public function index() {
         $data = ProductTag::all();
-        return view('admin.blog.tags.index', compact('data'));
+        return view('admin.products.tags.index', compact('data'));
     }
 
     public function store(Request $request) {
@@ -28,7 +28,7 @@ class ProductTagController extends Controller {
 
     public function edit($id) {
         $tag = ProductTag::findOrFail($id);
-        return view('admin.blog.tags.edit', compact('tag'));
+        return view('admin.products.tags.edit', compact('tag'));
     }
 
     public function update($id, Request $request) {
@@ -41,7 +41,7 @@ class ProductTagController extends Controller {
             'title' => $request->title,
             'slug' => Str::slug($request->title)
         ]);
-        return redirect()->route('admin.blog.tag.index');
+        return redirect()->route('admin.products.tag.index');
     }
 
     public function delete($id) {

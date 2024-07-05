@@ -270,11 +270,11 @@
                                                                 <div class="old-price">
                                                                     {{ $product->price }} ₼
                                                                 </div>
+                                                                <span>-</span>
                                                             @endif
-                                                            <span>-</span>
                                                             <div class="new-price">
                                                                 @if($product->discount)
-                                                                    {{ $product->price - (($product->price * $product->discount) / 100) }}
+                                                                    {{ $product->discount }}
                                                                     ₼
                                                                 @else
                                                                     {{ $product->price }} ₼

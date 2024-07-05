@@ -15,7 +15,7 @@ use Illuminate\View\View as Viewable;
 
 class FrontController extends Controller {
     public function index(): Viewable {
-        $categories = ProductCategory::all();
+        $categories = ProductCategory::has('products')->get();
         $products = Product::take(4)->get();
         $allProducts = Product::where('discount', '>', 0)->take(5)->get();
         return View::make('front.index', compact('categories', 'products', 'allProducts'));
@@ -51,28 +51,27 @@ class FrontController extends Controller {
 
     public function productDetail(string $slug): Viewable {
         $product = Product::whereSlug($slug)->firstOrFail();
-        $priceWithDiscount = $product->price - ($product->price * $product->discount) / 100;
         $otherProducts = Product::where('id', '!=', $product->id)->take(6)->get();
         $id = $product->id;
-        return View::make('front.product-detail', compact('product', 'priceWithDiscount', 'otherProducts', 'id'));
+        return View::make('front.product-detail', compact('product', 'otherProducts', 'id'));
     }
 
     public function productCategories(string $slug): Viewable {
         $category = ProductCategory::whereSlug($slug)->firstOrFail();
         $blogs = $category->products()->paginate(9);
-        return View::make('front.blog', compact('blogs'));
+        return View::make('front.blog', compact('blogs', 'category'));
     }
 
     public function productTags(string $slug): Viewable {
         $tag = ProductTag::whereSlug($slug)->firstOrFail();
         $blogs = $tag->products()->paginate(9);
-        return View::make('front.blog', compact('blogs'));
+        return View::make('front.blog', compact('blogs', 'tag'));
     }
 
     public function ages($slug) {
         $age = AgeGroup::whereSlug($slug)->firstOrFail();
         $blogs = $age->products()->paginate(9);
-        return View::make('front.blog', compact('blogs'));
+        return View::make('front.blog', compact('blogs', 'age'));
     }
 
     public function contact(): Viewable {
@@ -80,8 +79,9 @@ class FrontController extends Controller {
     }
 
     public function search() {
+        $search = request('search');
         $category = ProductCategory::whereId(request('category'))->firstOrFail();
         $blogs = $category->products()->where('title', 'like', '%' . request('search') . '%')->paginate(9);
-        return View::make('front.blog', compact('blogs'));
+        return View::make('front.blog', compact('blogs', 'search'));
     }
 }

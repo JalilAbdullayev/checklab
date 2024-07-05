@@ -70,7 +70,7 @@
             @enderror
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" name="description" id="description" placeholder="Açıqlama"
-                       required maxlength="255"/>
+                       maxlength="255"/>
                 <label for="description" class="form-label text-white-50">
                     Açıqlama
                 </label>
@@ -82,7 +82,7 @@
                 <label for="text" class="form-label text-white-50">
                     Məzmun
                 </label>
-                <textarea class="form-control" name="text" id="text" required placeholder="Məzmun"></textarea>
+                <textarea class="form-control" name="text" id="text" placeholder="Məzmun"></textarea>
             </div>
             @error('text')
             <div class="alert alert-danger">{{ $message }}</div>

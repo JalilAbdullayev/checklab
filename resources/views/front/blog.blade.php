@@ -28,9 +28,28 @@
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">
                             Ana Səhifə
                         </a></li>
-                    <li class="breadcrumb-item active" aria-current="page">
+                    <li class="breadcrumb-item @if(Route::is('blog.index')) active @endif"
+                        @if(Route::is('blog.index')) aria-current="page" @endif>
                         {{ $title }}
                     </li>
+                    @if(Route::is('blog.index'))
+                    @elseif(Route::is('product.tag'))
+                        <li class="breadcrumb-item active" aria-current="page">
+                            {{ $tag->title }}
+                        </li>
+                    @elseif(Route::is('product.category'))
+                        <li class="breadcrumb-item active" aria-current="page">
+                            {{ $category->title }}
+                        </li>
+                    @elseif(Route::is('product.age'))
+                        <li class="breadcrumb-item active" aria-current="page">
+                            {{ $age->title }}
+                        </li>
+                    @elseif(Route::is('search'))
+                        <li class="breadcrumb-item active" aria-current="page">
+                            {{ $search }}
+                        </li>
+                    @endif
                 </ol>
             </nav>
         </div>
@@ -77,13 +96,6 @@
                             <div class="blog-item-title">
                                 {{ $blog->title }}
                             </div>
-                            <button class="blog-item-button">
-                                Read more
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240.823 240.823">
-                                    <path
-                                        d="M57.633 129.007L165.93 237.268c4.752 4.74 12.451 4.74 17.215 0 4.752-4.74 4.752-12.439 0-17.179l-99.707-99.671 99.695-99.671c4.752-4.74 4.752-12.439 0-17.191-4.752-4.74-12.463-4.74-17.215 0L57.621 111.816c-4.679 4.691-4.679 12.511.012 17.191z"></path>
-                                </svg>
-                            </button>
                         </a>
                     </div>
                 @endforeach
