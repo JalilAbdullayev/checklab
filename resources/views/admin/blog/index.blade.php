@@ -1,5 +1,10 @@
+@php use Illuminate\Support\Facades\Route; @endphp
 @extends('admin.layouts.master')
-@section('title', 'Bloq')
+@section('title')
+    Bloq @if(!Route::is('admin.blog.index'))
+        | {{ $title }}
+    @endif
+@endsection
 @section('css')
     <link rel="stylesheet" href="{{asset("back/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css")}}"/>
     <link rel="stylesheet" href="{{asset("back/node_modules/datatables.net-bs4/css/responsive.dataTables.min.css")}}"/>
@@ -26,6 +31,9 @@
                         @yield('title')
                     </li>
                 </ol>
+                <a href="{{ route('admin.blog.create') }}" class="btn btn-primary d-none d-lg-block m-l-15 text-white">
+                    <i class="ti-plus"></i> Yeni Bloq
+                </a>
             </div>
         </div>
     </div>
@@ -42,9 +50,11 @@
                 <th>
                     Şəkil
                 </th>
-                <th>
-                    Kateqoriya
-                </th>
+                @if(!Route::is('admin.blog.category.all'))
+                    <th>
+                        Kateqoriya
+                    </th>
+                @endif
                 <th>
                     Teqlər
                 </th>
@@ -62,11 +72,19 @@
                     <td>
                         <img class="w-25" src="{{ Storage::url($item->image) }}" alt=""/>
                     </td>
+                    @if(!Route::is('admin.blog.category.all'))
+                        <td>
+                            <a href="{{ route('admin.blog.category.all', $item->category->slug) }}" class="text-body">
+                                {{ $item->category->title }}
+                            </a>
+                        </td>
+                    @endif
                     <td>
-                        {{ $item->category->title }}
-                    </td>
-                    <td>
-                        {{ $item->tags->pluck('title')->join(', ') }}
+                        @foreach($item->tags as $tag)
+                            <a href="{{ route('admin.blog.tag.all', $tag->slug) }}" class="text-body">
+                                {{ $tag->title }}
+                            </a>
+                        @endforeach
                     </td>
                     <td>
                         <a href="{{ route('admin.blog.edit', $item->id) }}" class="btn btn-outline-warning">

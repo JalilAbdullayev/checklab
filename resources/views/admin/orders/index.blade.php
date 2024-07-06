@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Orders')
+@section('title', 'Sifarişlər')
 @section('css')
     <link rel="stylesheet" href="{{asset("back/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css")}}"/>
     <link rel="stylesheet" href="{{asset("back/node_modules/datatables.net-bs4/css/responsive.dataTables.min.css")}}"/>
@@ -11,7 +11,7 @@
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
             <h4 class="text-white-50">
-                Order
+                @yield('title')
             </h4>
         </div>
         <div class="col-md-7 align-self-center text-end">
@@ -19,11 +19,11 @@
                 <ol class="breadcrumb justify-content-end">
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.index') }}">
-                            Home
+                            Ana Səhifə
                         </a>
                     </li>
                     <li class="breadcrumb-item active">
-                        Order
+                        @yield('title')
                     </li>
                 </ol>
             </div>
@@ -37,13 +37,13 @@
             <thead>
             <tr>
                 <th>
-                    Product
+                    Məhsul
                 </th>
                 <th>
-                    Quantity
+                    Say
                 </th>
                 <th>
-                    Price
+                    Qiymət
                 </th>
             </tr>
             </thead>
@@ -61,8 +61,7 @@
                             @endphp
                         </td>
                         <td>
-                            ${{ $orderProduct->quantity * ($product->price - (($product->price * $product->discount) /
-							100)) }}
+                            {{ $orderProduct->quantity * $orderProduct->price }} ₼
                         </td>
                     </tr>
                 @endforeach
@@ -71,7 +70,7 @@
             <tfoot>
             <tr>
                 <td colspan="2">
-                    Total
+                    Cəm
                 </td>
                 <td>
                     ${{ $total }}

@@ -80,11 +80,12 @@
                     @foreach($data as $item)
                         <tr id="{{ $item->id }}">
                             <td>
-                                {{ $item->title }}
+                                <a href="{{ route('admin.blog.tag.all', $item->slug) }}" class="text-body">
+                                    {{ $item->title }}
+                                </a>
                             </td>
                             <td>
-                                <a href="{{ route('admin.blog.tag.edit', $item->id) }}" class="btn
-                                btn-outline-warning">
+                                <a href="{{ route('admin.blog.tag.edit', $item->id) }}" class="btn btn-outline-warning">
                                     <i class="ti-pencil-alt"></i>
                                 </a>
                                 <button class="btn btn-outline-danger">

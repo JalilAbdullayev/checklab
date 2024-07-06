@@ -44,6 +44,12 @@ class AgeGroupController extends Controller {
         return redirect()->route('admin.products.age-groups.index');
     }
 
+    public function all($slug) {
+        $age = AgeGroup::whereSlug($slug)->firstOrFail();
+        $data = $age->products;
+        return view('admin.products.index', compact('data'), ['title' => $age->title]);
+    }
+
     public function delete($id) {
         AgeGroup::findOrFail($id)->delete();
         return response()->json(200);

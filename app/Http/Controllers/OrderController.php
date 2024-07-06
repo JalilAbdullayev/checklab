@@ -21,7 +21,7 @@ class OrderController extends Controller {
         foreach($data as $item) {
             foreach($item->products as $product) {
                 $orderProduct = $item->order_products->where('product_id', $product->id)->first();
-                $total += $orderProduct->quantity * ($product->price - (($product->price * $product->discount) / 100));
+                $total += $orderProduct->quantity * $orderProduct->price;
             }
         }
         return view('admin.orders.index', compact('data', 'total'));

@@ -95,7 +95,9 @@
                     @foreach($data as $item)
                         <tr id="{{ $item->id }}">
                             <td>
-                                {{ $item->title }}
+                                <a href="{{ route('admin.products.category.all', $item->slug) }}" class="text-body">
+                                    {{ $item->title }}
+                                </a>
                             </td>
                             <td>
                                 <img src="{{ Storage::url($item->icon) }}" alt="" class="w-25"/>

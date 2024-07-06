@@ -1,6 +1,6 @@
 @php use App\Models\Cart;use App\Models\Message;use App\Models\Order;use App\Models\Product;use App\Models\Subscriber;use Illuminate\Support\Facades\Auth; @endphp
 @extends('admin.layouts.master')
-@section('title', 'Home')
+@section('title', 'Ana Səhifə')
 @section('content')
     <!-- ============================================================== -->
     <!-- Bread crumb and right sidebar toggle -->
@@ -15,7 +15,7 @@
             <div class="d-flex justify-content-end align-items-center">
                 <ol class="breadcrumb justify-content-end">
                     <li class="breadcrumb-item active">
-                        Home
+                        @yield('title')
                     </li>
                 </ol>
             </div>
@@ -60,7 +60,11 @@
                                 <div>
                                     <h3><i class="icon-bag"></i></h3>
                                     <p class="text-muted text-uppercase">
-                                        @if(Auth::user()->role < 2) Məhsullar @else Səbət @endif
+                                        @if(Auth::user()->role < 2)
+                                            Məhsullar
+                                        @else
+                                            Səbət
+                                        @endif
                                     </p>
                                 </div>
                                 <div class="ms-auto">

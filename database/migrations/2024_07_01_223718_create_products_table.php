@@ -13,15 +13,11 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->string('brand');
-            $table->string('form');
-            $table->string('color');
             $table->string('description');
             $table->text('text');
             $table->string('image')->nullable();
-            $table->unsignedMediumInteger('quantity');
-            $table->unsignedSmallInteger('price');
-            $table->unsignedTinyInteger('discount')->nullable();
+            $table->decimal('price', 10, 2)->unsigned();
+            $table->decimal('discount', 10, 2)->nullable();
             $table->timestamps();
         });
     }

@@ -63,7 +63,7 @@
                 <div class="col-lg-6 d-flex justify-content-end">
                     <div class="language-switcher">
                         <div class="language-toggle">
-                            <span class="current-language">En</span>
+                            <span class="current-language">Az</span>
                             <img class="arrow-language" src="{{ asset("front/images/icons/arrow-down.svg") }}"
                                  alt="arrow"/>
                         </div>
@@ -380,11 +380,10 @@
     <div class="subscribe">
         <div class="container">
             <div class="subscribe-content">
-                <div class="subscribe-title">Join our newsletter</div>
-                <div class="subscribe-desc">
-                    Join over half a million vitamin lovers and get our latest deals,
-                    articles, and resources!
+                <div class="subscribe-title">
+                    Xəbər lentimizə qoşulun
                 </div>
+                <div class="subscribe-desc"></div>
                 <form action="{{ route('subscribe') }}" method="POST">
                     @csrf
                     <div class="form-content">
@@ -394,7 +393,7 @@
                                 <path
                                     d="M507.606 4.394A15.002 15.002 0 0 0 492.689.633L33.808 138.298C13.586 144.364 0 162.624 0 183.743c0 20.826 13.985 39.367 34.011 45.089L227.8 284.2l55.368 193.789C288.89 498.014 307.431 512 328.265 512c21.111 0 39.371-13.586 45.438-33.808L511.367 19.31a14.996 14.996 0 0 0-3.761-14.916zM30 183.736c0-7.761 4.994-14.473 12.428-16.703L444.324 46.464 235.568 255.22 42.252 199.987C35.039 197.925 30 191.246 30 183.736zm314.968 285.836c-2.23 7.434-8.942 12.428-16.711 12.428-7.503 0-14.182-5.038-16.243-12.252l-55.233-193.316L465.537 67.676z"/>
                             </svg>
-                            <i class="fa-regular fa-envelope"></i> Subscribe
+                            <i class="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
                     @error('subscriber')
@@ -417,7 +416,7 @@
                         <div class="address">
                             {{ $contact->address }}
                         </div>
-                        <a href="" class="map-link">Show on map</a>
+                        <a class="map-link"></a>
                         <ul class="footer-social">
                             <li>
                                 <a href="{{ $contact->facebook }}">
@@ -439,7 +438,9 @@
                 </div>
                 <div class="col-lg-3 co-md-4 mb-3">
                     <div class="footer-column">
-                        <div class="footer-column-title">Need help</div>
+                        <div class="footer-column-title">
+                            Kömək lazımdır?
+                        </div>
                         <a href="tel:{{ $contact->phone }}" class="phone-num">
                             {{ $contact->phone }}
                         </a>
@@ -453,7 +454,9 @@
                 </div>
                 <div class="col-lg-3 co-md-4 mb-3">
                     <div class="footer-column">
-                        <div class="footer-column-title">Information</div>
+                        <div class="footer-column-title">
+                            Naviqasiya
+                        </div>
                         <nav>
                             <ul class="nav-list">
                                 <li>
@@ -461,9 +464,6 @@
                                 </li>
                                 <li>
                                     <a href="{{ route('blog.index') }}">Bloq </a>
-                                </li>
-                                <li>
-                                    <a href="">Kampaniyalar</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('contact') }}">Əlaqə</a>
@@ -475,8 +475,8 @@
 
             </div>
             <div class="copyright">
-                Copyright {{ date('Y') == 2024 ? 2024 : '2024 -' . date('Y') }} {{ $settings->title }}. All Rights
-                Reserved
+                &copy; {{ date('Y') == 2024 ? 2024 : '2024 -' . date('Y') }} {{ $settings->title }}. Bütün
+                hüquqları qorunur.
             </div>
         </div>
     </div>

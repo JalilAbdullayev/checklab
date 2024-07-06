@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -42,7 +43,12 @@ class BlogCategoryController extends Controller {
             'slug' => Str::slug($request->title)
         ]);
         return redirect()->route('admin.blog.category.index');
+    }
 
+    public function all($slug) {
+        $category = BlogCategory::whereSlug($slug)->firstOrFail();
+        $data = Blog::whereCategoryId($category->id)->get();
+        return view('admin.blog.index', compact('data'), ['title' => $category->title]);
     }
 
     public function delete($id) {

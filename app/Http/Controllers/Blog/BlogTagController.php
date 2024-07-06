@@ -44,6 +44,12 @@ class BlogTagController extends Controller {
         return redirect()->route('admin.blog.tag.index');
     }
 
+    public function all($slug) {
+        $tag = BlogTag::whereSlug($slug)->firstOrFail();
+        $data = $tag->blogs;
+        return view('admin.blog.index', compact('data'), ['title' => $tag->title]);
+    }
+
     public function delete($id) {
         BlogTag::findOrFail($id)->delete();
         return response()->json(200);

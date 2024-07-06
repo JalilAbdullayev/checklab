@@ -1,6 +1,6 @@
-@php use App\Models\User; @endphp
+@php use App\Models\User;use Carbon\Carbon; @endphp
 @extends('admin.layouts.master')
-@section('title', 'Orders')
+@section('title', 'Sifarişlər')
 @section('css')
     <link rel="stylesheet" href="{{asset("back/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css")}}"/>
     <link rel="stylesheet" href="{{asset("back/node_modules/datatables.net-bs4/css/responsive.dataTables.min.css")}}"/>
@@ -12,7 +12,7 @@
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
             <h4 class="text-white-50">
-                Orders
+                @yield('title')
             </h4>
         </div>
         <div class="col-md-7 align-self-center text-end">
@@ -20,11 +20,11 @@
                 <ol class="breadcrumb justify-content-end">
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.index') }}">
-                            Home
+                            Ana Səhifə
                         </a>
                     </li>
                     <li class="breadcrumb-item active">
-                        Orders
+                        @yield('title')
                     </li>
                 </ol>
             </div>
@@ -38,16 +38,16 @@
             <thead>
             <tr>
                 <th>
-                    Order #
+                    Sifariş №
                 </th>
                 <th>
-                    User
+                    Müştəri
                 </th>
                 <th>
-                    Created
+                    Tarix və saat
                 </th>
                 <th>
-                    Operations
+                    Əməliyyatlar
                 </th>
             </tr>
             </thead>
@@ -55,8 +55,8 @@
             @for($i = 0; $i < count($data); $i++)
                 <tr id="{{ $data[$i]->id }}">
                     <td>
-                        <a href="{{ route('admin.order.index', $data[$i]->id) }}">
-                            #{{ $i + 1 }}
+                        <a href="{{ route('admin.order.order', $data[$i]->id) }}">
+                            № {{ $i + 1 }}
                         </a>
                     </td>
                     <td>
@@ -64,8 +64,8 @@
                             {{ User::whereId($data[$i]->user_id)->first()->name }}
                         </a>
                     </td>
-                    <td>
-                        {{ $data[$i]->created_at }}
+                    <td class="text-capitalize">
+                        {{ Carbon::parse($data[$i]->created_at)->locale('az')->translatedFormat('j F Y H:m') }}
                     </td>
                     <td>
                         <button class="btn btn-outline-danger">

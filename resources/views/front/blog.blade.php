@@ -15,6 +15,10 @@
         .blog-item-image img {
             object-fit: contain !important;
         }
+
+        .blog-item-type span {
+            padding: 0 .25rem;
+        }
     </style>
 @endsection
 @section('content')
@@ -25,9 +29,11 @@
                 %3Csvgxmlns='http://www.w3.org/2000/svg'width='8'height='8'%3E%3Cpathd='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z'fill='%236c757d'/%3E%3C/svg%3E&#34;
               );">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('home') }}">
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('home') }}">
                             Ana Səhifə
-                        </a></li>
+                        </a>
+                    </li>
                     <li class="breadcrumb-item @if(Route::is('blog.index')) active @endif"
                         @if(Route::is('blog.index')) aria-current="page" @endif>
                         {{ $title }}
@@ -59,11 +65,8 @@
             <div class="row">
                 @foreach($blogs as $blog)
                     <div class="col-lg-4 col-md-6 mb-3">
-                        <a href="@if(Route::is('search') || Route::is('product.category') || Route::is('product.tag')
-                         || Route::is('product.age'))
-						{{ route('product.index', $blog->slug) }}
-						@else {{ route('blog.detail', $blog->slug) }} @endif"
-                           class="blog-item">
+                        <a href="@if(Route::is('blog.index')) {{ route('blog.detail', $blog->slug) }} @else
+                        javascript:void(0) @endif" class="blog-item">
                             <div class="blog-item-image">
                                 @if($blog->image)
                                     <img src="{{ Storage::url($blog->image) }}"
@@ -88,12 +91,16 @@
                             <span class="blog-item-type">
                                 @if(Route::is('search') || Route::is('product.category') || Route::is('product.tag')
                                 || Route::is('product.age'))
-                                    {{ $blog->categories->pluck('title')->join(', ') }}
+                                    @foreach($blog->categories as $category)
+                                        <span id="{{ $category->slug }}">
+                                            {{ $category->title }}
+                                        </span>
+                                    @endforeach
                                 @else
                                     {{ $blog->category->title }}
                                 @endif
                             </span>
-                            <div class="blog-item-title">
+                            <div class="blog-item-title" id="{{ $blog->slug }}">
                                 {{ $blog->title }}
                             </div>
                         </a>
@@ -108,3 +115,17 @@
         </div>
     </div>
 @endsection
+@if(!Route::is('blog.index'))
+    @section('js')
+        <script>
+            $('.blog-item-title').click(function() {
+                let slug = $(this).attr('id');
+                window.location.href = '{{ route('product.index', ':slug') }}'.replace(':slug', slug);
+            })
+            $('.blog-item-type span').click(function() {
+                let slug = $(this).attr('id');
+                window.location.href = '{{ route('product.category', ':slug') }}'.replace(':slug', slug);
+            })
+        </script>
+    @endsection
+@endif

@@ -74,6 +74,12 @@ class ProductCategoryController extends Controller {
         return redirect()->route('admin.products.category.index');
     }
 
+    public function all($slug) {
+        $category = ProductCategory::whereSlug($slug)->firstOrFail();
+        $data = $category->products;
+        return view('admin.products.index', compact('data'), ['title' => $category->title]);
+    }
+
     public function delete($id) {
         $category = ProductCategory::findOrFail($id);
         if($category->icon && Storage::exists('public/' . $category->icon)) {

@@ -71,7 +71,7 @@
                                             </a></td>
                                         <td class="pr_price">
                                             @if($product->discount)
-                                                {{ $product->price - ($product->price * $product->discount) / 100 }}
+                                                {{ $product->discount }}
                                             @else
                                                 {{ $product->price }}
                                             @endif ₼
@@ -93,7 +93,7 @@
                                             @endif
                                         </td>
                                         <td class="pr_price">@if($product->discount)
-                                                {{ $cartProduct->quantity * ($product->price - (($product->price * $product->discount) / 100)) }}
+                                                {{ $cartProduct->quantity * $product->discount }}
                                             @else
                                                 {{ $cartProduct->quantity * $product->price }}
                                             @endif ₼

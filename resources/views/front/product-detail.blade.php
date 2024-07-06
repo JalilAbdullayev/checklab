@@ -6,6 +6,14 @@
         .product-image img {
             object-fit: contain !important;
         }
+
+        .details-2 li {
+            flex-wrap: wrap;
+
+            a {
+                padding: 0 .25rem;
+            }
+        }
     </style>
 @endsection
 @section('content')
@@ -54,8 +62,7 @@
                             <div class="d-flex gap-3">
                                 <div class="counter">
                                     <button type="button" class="dec">-</button>
-                                    <input type="number" value="1" min="0" max="{{ $product->quantity }}"
-                                           name="quantity" maxlength="{{ Str::length($product->quantity)}}"/>
+                                    <input type="number" value="1" min="1" name="quantity"/>
                                     <button type="button" class="inc">+</button>
                                 </div>
                                 <button type="submit" class="add-to-cart">
@@ -202,25 +209,12 @@
         const input = $('input[type="number"]');
         $('.inc').click(function() {
             input.val(parseInt(input.val()) + 1);
-            $('.dec').attr('disabled', false).css('cursor', 'pointer');
-            if(input.val() == {{ $product->whereId($id)->first()->quantity }}) {
-                $('.inc').attr('disabled', true).css('cursor', 'not-allowed');
-            } else {
-                $('.inc').attr('disabled', false);
-            }
         })
         $('.dec').click(function() {
             if(input.val() > 1) {
                 input.val(parseInt(input.val()) - 1);
                 $('.inc').attr('disabled', false).css('cursor', 'pointer');
-            } else {
-                $('.dec').attr('disabled', true).css('cursor', 'not-allowed');
             }
         })
-        if(input.val() <= 1) {
-            $('.dec').attr('disabled', true).css('cursor', 'not-allowed');
-        } else {
-            $('.dec').attr('disabled', false).css('cursor', 'pointer');
-        }
     </script>
 @endsection

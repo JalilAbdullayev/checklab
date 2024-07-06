@@ -116,6 +116,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function() {
                     Route::post('/', 'update');
                 });
 
+                Route::get('all/{slug}', 'all')->name('all');
                 Route::get('delete/{id}', 'delete')->name('delete');
             });
 
@@ -130,6 +131,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function() {
                     Route::post('/', 'update');
                 });
 
+                Route::get('all/{slug}', 'all')->name('all');
                 Route::get('delete/{id}', 'delete')->name('delete');
             });
         });
@@ -159,6 +161,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function() {
                     Route::get('/', 'edit');
                     Route::post('/', 'update');
                 });
+
+                Route::get('all/{slug}', 'all')->name('all');
                 Route::get('delete/{id}', 'delete')->name('delete');
             });
 
@@ -172,6 +176,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function() {
                     Route::get('/', 'edit');
                     Route::post('/', 'update');
                 });
+
+                Route::get('all/{slug}', 'all')->name('all');
                 Route::get('delete/{id}', 'delete')->name('delete');
             });
 
@@ -186,16 +192,19 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function() {
                     Route::post('/', 'update');
                 });
 
+                Route::get('all/{slug}', 'all')->name('all');
                 Route::get('delete/{id}', 'delete')->name('delete');
             });
         });
     });
     Route::prefix('order')->name('order.')->controller(OrderController::class)->group(function() {
+        Route::middleware(Moderator::class)->group(function() {
+            Route::get('all', 'all')->name('all');
+            Route::get('user/{id}', 'user')->name('user');
+            Route::get('delete/{id}', 'delete')->name('delete');
+        });
         Route::get('/', 'index')->name('index');
-        Route::get('order/{id}', 'order')->name('order');
-        Route::get('all', 'all')->name('all');
-        Route::get('user/{id}', 'user')->name('user');
-        Route::get('delete/{id}', 'delete')->name('delete');
+        Route::get('{id}', 'order')->name('order');
     });
 
     Route::prefix('profile')->name('profile.')->controller(ProfileController::class)->group(function() {

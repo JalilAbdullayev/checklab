@@ -19,7 +19,7 @@ class CartController extends Controller {
         foreach($data as $item) {
             foreach($item->products as $product) {
                 $cartProduct = $item->cart_products->where('product_id', $product->id)->first();
-                $total += $cartProduct->quantity * ($product->price - (($product->price * $product->discount) / 100));
+                $total += $cartProduct->quantity * $product->discount;
             }
         }
         return View::make('front.cart', compact('data', 'total'));
@@ -36,23 +36,12 @@ class CartController extends Controller {
             'user_id' => Auth::user()->id
         ]);
         $cartProduct = $cart->cart_products()->where('product_id', $product->id)->first();
-        if($product->quantity == 0) {
-            return Redirect::back()->with('error', 'Bu sayda məhsul mövcud deyil.');
-        }
 
         if($cartProduct) {
-            if($product->quantity < $request->quantity + $cartProduct->quantity) {
-                return Redirect::back()->with('error', 'Bu sayda məhsul mövcud deyil.');
-            }
-
             $cartProduct->update([
                 'quantity' => $cartProduct->quantity + 1
             ]);
         } else {
-            if($product->quantity < $request->quantity) {
-                return Redirect::back()->with('error', 'Bu sayda məhsul mövcud deyil.');
-            }
-
             $cart->products()->attach($product->id, [
                 'quantity' => $request->quantity
             ]);
@@ -61,16 +50,11 @@ class CartController extends Controller {
     }
 
     public function update($id, Request $request) {
-        $product = Product::findOrFail($id);
         $cart = Cart::whereUserId(Auth::user()->id)->first();
         $cartProduct = CartProduct::whereCartId($cart->id)->whereProductId($id)->first();
-        if($request->quantity <= $product->quantity) {
-            $cartProduct->update([
-                'quantity' => $request->quantity
-            ]);
-        } else {
-            return Redirect::back()->with('error', 'Bu sayda məhsul mövcud deyil.');
-        }
+        $cartProduct->update([
+            'quantity' => $request->quantity
+        ]);
         return Redirect::back();
     }
 
@@ -95,13 +79,17 @@ class CartController extends Controller {
         $order->save();
         foreach($cart->cart_products as $cartProduct) {
             $product = Product::findOrFail($cartProduct->product_id);
-            $product->decrement('quantity', $cartProduct->quantity);
             $orderProduct = new OrderProduct;
             $orderProduct->order_id = $order->id;
             $orderProduct->product_id = $product->id;
             $orderProduct->quantity = $cartProduct->quantity;
+            $orderProduct->price = $product->discount ?: $product->price;
             $orderProduct->save();
-            $total = $cartProduct->quantity * ($product->price - (($product->price * $product->discount) / 100));
+            if($product->discount) {
+                $total = $cartProduct->quantity * $product->discount;
+            } else {
+                $total = $cartProduct->quantity * $product->price;
+            }
         }
         $order->total = $total;
         $order->save();

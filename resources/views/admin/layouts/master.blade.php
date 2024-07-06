@@ -27,7 +27,9 @@
 <div class="preloader">
     <div class="loader">
         <div class="loader__figure"></div>
-        <p class="loader__label">Elite admin</p>
+        <p class="loader__label">
+            {{ $settings->title }}
+        </p>
     </div>
 </div>
 <!-- Main wrapper - style you can find in pages.scss -->

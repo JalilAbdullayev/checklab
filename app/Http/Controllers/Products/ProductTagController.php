@@ -44,6 +44,12 @@ class ProductTagController extends Controller {
         return redirect()->route('admin.products.tag.index');
     }
 
+    public function all($slug) {
+        $tag = ProductTag::whereSlug($slug)->firstOrFail();
+        $data = $tag->products;
+        return view('admin.products.index', compact('data'), ['title' => $tag->title]);
+    }
+
     public function delete($id) {
         ProductTag::findOrFail($id)->delete();
         return response()->json(200);
