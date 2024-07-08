@@ -59,8 +59,7 @@
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             <div class="form-floating mb-3">
-                <input type="number" class="form-control" name="discount" id="discount" placeholder="Endirim" min="0"
-                       max="100" maxlength="3"/>
+                <input type="number" class="form-control" name="discount" id="discount" placeholder="Endirim" min="0"/>
                 <label for="discount" class="form-label text-white-50">
                     Endirimli qiymət
                 </label>

@@ -3,7 +3,7 @@
 @section('title', 'Ana Səhifə')
 @section('css')
     <style>
-        .products {
+        .products:first-child {
             margin-top: 3rem;
         }
     </style>
@@ -11,10 +11,12 @@
 @section('content')
     <section class="products">
         <div class="container">
-            <div class="section-title">popular categories</div>
+            <div class="section-title">
+                Kateqoriyalar
+            </div>
             <nav>
                 <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
-                    @foreach($categories->take(6) as $category)
+                    @foreach($categories as $category)
                         <button class="nav-link @if($loop->first) active @endif" id="nav-home-tab" data-bs-toggle="tab"
                                 data-bs-target="#{{ $category->slug }}" type="button" role="tab"
                                 aria-controls="nav-home" aria-selected="true">
@@ -29,7 +31,7 @@
                          role="tabpanel"
                          aria-labelledby="{{ $category->slug }}-tab">
                         <div class="product-row">
-                            @foreach($category->products as $product)
+                            @foreach($category->products()->inRandomOrder()->get() as $product)
                                 <div class="product-card">
                                     <a href="{{ route('product.index', $product->slug) }}">
                                         <div class="product-image">
@@ -186,6 +188,65 @@
                         </div>
                     </div>
                 @endif
+            </div>
+        </div>
+    </section>
+    <section class="products">
+        <div class="container">
+            <div class="section-title">
+                Yaş qrupları
+            </div>
+            <nav>
+                <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+                    @foreach($ages->take(6) as $age)
+                        <button class="nav-link @if($loop->first) active @endif" id="nav-home-tab" data-bs-toggle="tab"
+                                data-bs-target="#i{{ $age->slug }}" type="button" role="tab" aria-controls="nav-home"
+                                aria-selected="true">
+                            {{ $age->title }}
+                        </button>
+                    @endforeach
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                @foreach($ages as $age)
+                    <div class="tab-pane fade show @if($loop->first) active @endif" id="i{{ $age->slug }}"
+                         role="tabpanel" aria-labelledby="{{ $age->slug }}-tab">
+                        <div class="product-row">
+                            @foreach($age->products()->inRandomOrder()->get() as $product)
+                                <div class="product-card">
+                                    <a href="{{ route('product.index', $product->slug) }}">
+                                        <div class="product-image">
+                                            <img src="{{ Storage::url($product->image) }}" alt=""/>
+                                        </div>
+                                    </a>
+                                    <div class="product-cat">
+                                        @foreach($product->categories as $age)
+                                            <a href="{{ route('product.category', $age->slug) }}">
+                                                {{ $age->title }}
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                    <a href="{{ route('product.index', $product->slug) }}" class="product-name">
+                                        {{ $product->title }}
+                                    </a>
+                                    <div class="price">
+                                        @if($product->discount)
+                                            <div class="old-price">{{ $product->price }} ₼</div>
+                                            <span>-</span>
+                                        @endif
+                                        <div class="new-price">
+                                            @if($product->discount)
+                                                {{ $product->discount }} ₼
+                                            @else
+                                                {{ $product->price }} ₼
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>

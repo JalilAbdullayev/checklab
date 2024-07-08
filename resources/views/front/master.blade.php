@@ -1,11 +1,13 @@
-@php use Illuminate\Support\Facades\Storage; @endphp
+@php use Illuminate\Support\Facades\Route;use Illuminate\Support\Facades\Storage; @endphp
     <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8"/>
     <meta name="author" content="{{ $settings->author }}"/>
-    <meta name="description" content="{{ $settings->description }}"/>
-    <meta name="keywords" content="{{ $settings->keywords }}"/>
+    <meta name="description"
+          content="@if(Route::is('blog.detail')){{ $blog->description }}@elseif(Route::is('product.index')){{ $product->description }}@else{{ $settings->description }}@endif"/>
+    <meta name="keywords"
+          content="@if(Route::is('blog.detail')){{ $blog->tags->pluck('title')->join(', ') }}@elseif(Route::is('product.index')){{ $product->tags->pluck('title')->join(', ') }}@endif, {{ $settings->keywords }}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>
         @yield('title') | {{ $settings->title }}

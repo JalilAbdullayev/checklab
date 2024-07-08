@@ -15,10 +15,10 @@ use Illuminate\View\View as Viewable;
 
 class FrontController extends Controller {
     public function index(): Viewable {
-        $categories = ProductCategory::has('products')->get();
-        $products = Product::take(4)->get();
+        $categories = ProductCategory::has('products')->inRandomOrder()->get();
         $allProducts = Product::where('discount', '>', 0)->take(5)->get();
-        return View::make('front.index', compact('categories', 'products', 'allProducts'));
+        $ages = AgeGroup::has('products')->get();
+        return View::make('front.index', compact('categories', 'allProducts', 'ages'));
     }
 
     public function about(): Viewable {

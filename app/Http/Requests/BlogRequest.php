@@ -20,7 +20,7 @@ class BlogRequest extends FormRequest {
      */
     public function rules(): array {
         return [
-            'title' => 'required|max:255',
+            'title' => 'required|max:255|unique:blogs,title',
             'description' => 'required|max:255',
             'text' => 'required',
             'category_id' => 'required',
@@ -30,13 +30,14 @@ class BlogRequest extends FormRequest {
 
     public function messages(): array {
         return [
-            'title.required' => 'Başlıq daxil edilməlidir',
-            'description.required' => 'Açıqlama daxil edilməlidir',
-            'text.required' => 'Məzmun daxil edilməlidir',
-            'category_id.required' => 'Kateqoriya daxil edilməlidir',
-            'title.max' => 'Başlıq 255 simvoldan artıq ola bilməz',
-            'description.max' => 'Açıqlama 255 simvoldan artıq ola bilməz',
-            'text.max' => 'Məzmun 255 simvoldan artıq ola bilməz',
+            'title.required' => 'Başlıq daxil edilməlidir.',
+            'title.unique' => 'Bu başlıq artıq mövcuddur.',
+            'description.required' => 'Açıqlama daxil edilməlidir.',
+            'text.required' => 'Məzmun daxil edilməlidir.',
+            'category_id.required' => 'Kateqoriya daxil edilməlidir.',
+            'title.max' => 'Başlıq 255 simvoldan artıq ola bilməz.',
+            'description.max' => 'Açıqlama 255 simvoldan artıq ola bilməz.',
+            'text.max' => 'Məzmun 255 simvoldan artıq ola bilməz.',
             'image.image' => 'Şəkil şəkil olmalıdır.',
             'image.mimes' => 'Şəkil bu fayl tiplərindən biri olmalıdır: jpeg, png, jpg, gif, svg.',
             'image.max' => 'Şəkil ölçüsü 2MB-dan çox ola bilməz.'
