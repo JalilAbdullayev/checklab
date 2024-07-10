@@ -14,7 +14,8 @@ export default defineConfig({
                 'public/front/css/reset.css',
                 'public/front/css/global.css',
                 'public/front/css/main.css',
-                'public/front/css/mobile.css'
+                'public/front/css/mobile.css',
+                'public/back/dist/css/pages/login-register-lock.css'
             ],
             refresh: true,
         }),
