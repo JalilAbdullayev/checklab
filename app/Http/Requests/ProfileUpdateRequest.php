@@ -28,16 +28,16 @@ class ProfileUpdateRequest extends FormRequest {
     }
 
     public function messages() {
-        $required = 'The :attribute field is required.';
-        $max = 'The :attribute must be less than :max characters';
+        $required = ' boş buraxıla bilməz.';
+        $max = ' uzunluğu :max simvoldan çox ola bilməz.';
         return [
-            'name.required' => $required,
-            'name.max' => $max,
-            'email.email' => 'Email must be valid',
-            'email.lowercase' => 'Email must be lowercase',
-            'email.unique' => 'Email already exists',
-            'email.max' => $max,
-            'email.required' => $required,
+            'name.required' => 'Ad' . $required,
+            'name.max' => 'Ad' . $max,
+            'email.email' => 'Düzgün e-mail daxil edin.',
+            'email.lowercase' => 'E-mailinizi kiçik hərflərlə daxil edin.',
+            'email.unique' => 'E-mail artıq mövcuddur.',
+            'email.max' => 'E-mail' . $max,
+            'email.required' => 'E-mail' . $required,
         ];
     }
 }

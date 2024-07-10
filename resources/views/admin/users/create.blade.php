@@ -33,7 +33,7 @@
     <!-- ============================================================== -->
     <!-- End Bread crumb and right sidebar toggle -->
     <!-- ============================================================== -->
-    <form class="card" method="POST" action="{{ route('register') }}">
+    <form class="card" method="POST">
         @csrf
         <div class="card-body">
             <div class="form-floating mb-3">
