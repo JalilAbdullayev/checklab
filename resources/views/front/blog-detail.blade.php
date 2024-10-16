@@ -42,7 +42,7 @@
 			</div>
 			@if($blog->image)
 				<div class="blog-detail-image">
-					<img src="{{ Storage::url($blog->image) }}" alt="{{ $blog->title }}"/>
+					<img src="{{ asset(Storage::url($blog->image)) }}" alt="{{ $blog->title }}"/>
 					<a href="{{ route('blog.category', $blog->category->slug) }}">
 						<div class="blog-detail-type">
 							{{ $blog->category->title }}
@@ -81,7 +81,7 @@
 							<a href="{{ route('blog.detail', $post->slug) }}" class="blog-item">
 								<div class="blog-item-image">
 									@if($post->image)
-										<img src="{{ Storage::url($post->image) }}"
+										<img src="{{ asset(Storage::url($post->image)) }}"
 											 alt="{{ $post->title }}"/>
 									@endif
 								</div>

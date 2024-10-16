@@ -61,7 +61,7 @@
                                         <td>
                                             <div class="pr-img">
                                                 <a href="{{ route('product.index', $product->slug) }}">
-                                                    <img src="{{ Storage::url($product->image) }}"
+                                                    <img src="{{ asset(Storage::url($product->image)) }}"
                                                          alt="{{ $product->title }}"/>
                                                 </a>
                                             </div>

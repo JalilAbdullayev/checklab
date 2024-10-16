@@ -69,7 +69,7 @@
                         javascript:void(0) @endif" class="blog-item">
                             <div class="blog-item-image">
                                 @if($blog->image)
-                                    <img src="{{ Storage::url($blog->image) }}"
+                                    <img src="{{ asset(Storage::url($blog->image)) }}"
                                          alt="{{ $blog->title }}"/>
                                 @endif
                             </div>

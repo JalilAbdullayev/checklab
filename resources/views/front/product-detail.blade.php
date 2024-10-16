@@ -35,7 +35,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-4 mb-3">
                     <div class="product-image">
-                        <img src="{{ Storage::url($product->image) }}" alt="{{ $product->title }}" width="400"/>
+                        <img src="{{ asset(Storage::url($product->image)) }}" alt="{{ $product->title }}" width="400"/>
                     </div>
                 </div>
                 <div class="col-lg-5 mb-3">
@@ -163,7 +163,7 @@
                             <div class="product-card">
                                 <a href="{{ route('product.index', $product->slug) }}">
                                     <div class="product-image">
-                                        <img src="{{ Storage::url($product->image) }}" alt=""/>
+                                        <img src="{{ asset(Storage::url($product->image)) }}" alt=""/>
                                     </div>
                                 </a>
                                 <div class="product-cat">
@@ -189,13 +189,6 @@
                                         ₼
                                     </div>
                                 </div>
-                                <button class="add-basket">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.426 13.695">
-                                        <path
-                                            d="M17.388 3.087 15.361 9.47a1.074 1.074 0 0 1-1.023.758H6.516a1.117 1.117 0 0 1-1.042-.7L2.481 1.515H.758A.758.758 0 0 1 .758 0h2.254a.776.776 0 0 1 .72.511l3.087 8.2h7.2l1.61-5.114H6.705a.758.758 0 1 1 0-1.515h9.963a.753.753 0 0 1 .606.322.735.735 0 0 1 .114.683ZM6.895 11.232a1.229 1.229 0 1 0 .871.36 1.249 1.249 0 0 0-.871-.36Zm6.8 0a1.229 1.229 0 1 0 .871.36 1.249 1.249 0 0 0-.871-.36Z"/>
-                                    </svg>
-                                    Səbətə əlavə et
-                                </button>
                             </div>
                         </div>
                     @endforeach

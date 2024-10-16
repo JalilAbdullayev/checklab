@@ -71,7 +71,7 @@
                         {{ $item->title }}
                     </td>
                     <td>
-                        <img class="w-25" src="{{ Storage::url($item->image) }}" alt=""/>
+                        <img class="w-25" src="{{ asset(Storage::url($item->image)) }}" alt=""/>
                     </td>
                     <td>
                         @foreach($item->categories as $category)

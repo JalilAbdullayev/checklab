@@ -18,8 +18,8 @@
     <![endif]-->
     @vite(['public/back/node_modules/morrisjs/morris.css',
 'public/back/node_modules/toast-master/css/jquery.toast.css',
-'public/back/dist/css/style.min.css',
 'public/back/dist/css/pages/dashboard1.css'])
+    <link rel="stylesheet" href="{{ asset('back/dist/css/style.min.css') }}"/>
     @yield('css')
 </head>
 <body class="skin-default-dark fixed-layout">

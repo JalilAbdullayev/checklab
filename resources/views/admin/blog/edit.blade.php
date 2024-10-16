@@ -102,7 +102,7 @@
 				</label>
 				<input type="file" name="image" id="image" class="dropify" data-show-remove="false"
 					   accept="image/jpeg, image/png, image/jpg, image/gif, image/svg"
-					   @if($blog->image) data-default-file="{{ Storage::url($blog->image) }}" @endif/>
+					   @if($blog->image) data-default-file="{{ asset(Storage::url($blog->image)) }}" @endif/>
 			</div>
 			@error('image')
 			<div class="alert alert-danger">{{ $message }}</div>

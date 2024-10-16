@@ -100,7 +100,7 @@
                                 </a>
                             </td>
                             <td>
-                                <img src="{{ Storage::url($item->icon) }}" alt="" class="w-25"/>
+                                <img src="{{ asset(Storage::url($item->icon)) }}" alt="" class="w-25"/>
                             </td>
                             <td>
                                 <a href="{{ route('admin.products.category.edit', $item->id) }}" class="btn

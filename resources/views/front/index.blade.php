@@ -35,7 +35,7 @@
                                 <div class="product-card">
                                     <a href="{{ route('product.index', $product->slug) }}">
                                         <div class="product-image">
-                                            <img src="{{ Storage::url($product->image) }}" alt=""/>
+                                            <img src="{{ asset(Storage::url($product->image)) }}" alt=""/>
                                         </div>
                                     </a>
                                     <div class="product-cat">
@@ -78,7 +78,7 @@
                             <a href="{{ route('product.category', $category->slug) }}" class="slider-item">
                                 @if($category->icon)
                                     <div class="category-img">
-                                        <img src="{{ Storage::url($category->icon) }}" alt="category"/>
+                                        <img src="{{ asset(Storage::url($category->icon)) }}" alt="category"/>
                                     </div>
                                 @endif
                                 <div class="category-name">
@@ -108,7 +108,7 @@
                             <div class="col-lg-8">
                                 <div class="banner-row-item bg-gray banner-item">
                                     <div class="banner_img">
-                                        <img src="{{ Storage::url($allProducts[0]->image) }}" alt="product"/>
+                                        <img src="{{ asset(Storage::url($allProducts[0]->image)) }}" alt="product"/>
                                     </div>
                                     <div class="banner_text">
                                         <a href="{{ route('product.index', $allProducts[0]->slug) }}">
@@ -125,7 +125,7 @@
                                         </a>
                                     </div>
                                     <div class="banner_img">
-                                        <img src="{{ Storage::url($allProducts[1]->image) }}" alt="product"/>
+                                        <img src="{{ asset(Storage::url($allProducts[1]->image)) }}" alt="product"/>
                                     </div>
                                 </div>
                             </div>
@@ -138,7 +138,7 @@
                                             </a>
                                         </div>
                                         <div class="banner_img">
-                                            <img src="{{ Storage::url($allProducts[2]->image) }}" alt="product"/>
+                                            <img src="{{ asset(Storage::url($allProducts[2]->image)) }}" alt="product"/>
                                         </div>
                                     </div>
                                 </div>
@@ -149,7 +149,7 @@
                                 <div class="col-lg-8">
                                     <div class="banner-row-item banner-item bg-green">
                                         <div class="banner_img">
-                                            <img src="{{ Storage::url($allProducts[2]->image) }}" alt="product"/>
+                                            <img src="{{ asset(Storage::url($allProducts[2]->image)) }}" alt="product"/>
                                         </div>
                                         <div class="banner_text">
                                             <a href="{{ route('product.index', $allProducts[2]->slug) }}">
@@ -166,7 +166,7 @@
                                             </a>
                                         </div>
                                         <div class="banner_img">
-                                            <img src="{{ Storage::url($allProducts[3]->image) }}" alt="product"/>
+                                            <img src="{{ asset(Storage::url($allProducts[3]->image)) }}" alt="product"/>
                                         </div>
                                     </div>
                                 </div>
@@ -183,7 +183,7 @@
                                 </a>
                             </div>
                             <div class="banner_img">
-                                <img src="{{ Storage::url($allProducts[4]->image) }}" alt="product"/>
+                                <img src="{{ asset(Storage::url($allProducts[4]->image)) }}" alt="product"/>
                             </div>
                         </div>
                     </div>
@@ -216,7 +216,7 @@
                                 <div class="product-card">
                                     <a href="{{ route('product.index', $product->slug) }}">
                                         <div class="product-image">
-                                            <img src="{{ Storage::url($product->image) }}" alt=""/>
+                                            <img src="{{ asset(Storage::url($product->image)) }}" alt=""/>
                                         </div>
                                     </a>
                                     <div class="product-cat">

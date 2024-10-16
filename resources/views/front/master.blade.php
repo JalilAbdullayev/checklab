@@ -182,9 +182,6 @@
                 <div class="col-lg-2">
                     <div class="actions">
                         @auth
-                            <a href="wishlist.html" class="wishlist-btn">
-                                <img src="{{ asset("front/images/icons/wishlist.svg")}}" alt="wishlist"/>
-                            </a>
                             <a href="{{ route('cart.index') }}" class="basket-btn">
                                 <img src="{{ asset("front/images/icons/cart.svg")}}" alt="cart"/>
                             </a>
@@ -253,7 +250,7 @@
                                                     <div class="product-card">
                                                         <a href="{{ route('product.index', $product->slug) }}">
                                                             <div class="product-image">
-                                                                <img src="{{ Storage::url($product->image) }}" alt=""/>
+                                                                <img src="{{ asset(Storage::url($product->image)) }}" alt=""/>
                                                             </div>
                                                         </a>
                                                         <div class="product-cat">
