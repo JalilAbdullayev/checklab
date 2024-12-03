@@ -80,6 +80,9 @@
                             </div>
                         @endif
                     </div>
+                    <button class="wishlist-button" id="{{ $product->id }}">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
                     <div class="details-2">
                         <ul>
                             <li>
@@ -209,5 +212,22 @@
                 $('.inc').attr('disabled', false).css('cursor', 'pointer');
             }
         })
+        $('.wishlist-button').click(function() {
+            let id = $(this).attr('id');
+            $.ajax({
+                url: '{{ route('wishlist.store', ':id') }}'.replace(':id', id),
+                async: false,
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function() {
+                    $('.wishlist-button').attr('disabled', true).css('cursor', 'not-allowed');
+                },
+                error: function() {
+                    alert('error');
+                }
+            });
+        });
     </script>
 @endsection

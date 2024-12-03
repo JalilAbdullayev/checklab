@@ -18,6 +18,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WishlistController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\Moderator;
 use Illuminate\Support\Facades\Auth;
@@ -44,14 +45,21 @@ Route::controller(FrontController::class)->group(function() {
     Route::get('search', 'search')->name('search');
 });
 
+Route::middleware('auth')->group(function() {
+    Route::prefix('cart')->name('cart.')->controller(CartController::class)->group(function() {
+        Route::get('/', 'index')->name('index');
+        Route::post('store/{id}', 'store')->name('store');
+        Route::get('delete/{id}', 'delete')->name('delete');
+        Route::post('update/{id}', 'update')->name('update');
+        Route::get('empty', 'empty')->name('empty');
+        Route::post('submit', 'submit')->name('submit');
+    });
 
-Route::prefix('cart')->name('cart.')->middleware('auth')->controller(CartController::class)->group(function() {
-    Route::get('/', 'index')->name('index');
-    Route::post('store/{id}', 'store')->name('store');
-    Route::get('delete/{id}', 'delete')->name('delete');
-    Route::post('update/{id}', 'update')->name('update');
-    Route::get('empty', 'empty')->name('empty');
-    Route::post('submit', 'submit')->name('submit');
+    Route::prefix('wishlist')->name('wishlist.')->controller(WishlistController::class)->group(function() {
+        Route::get('/', 'index')->name('index');
+        Route::post('store/{id}', 'store')->name('store');
+        Route::delete('delete/{id}', 'delete')->name('delete');
+    });
 });
 
 Route::prefix('contact')->name('contact')->group(function() {
