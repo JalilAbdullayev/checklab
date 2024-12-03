@@ -10,6 +10,8 @@ use App\Models\BlogTag;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductTag;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\View\View as Viewable;
 
@@ -83,5 +85,16 @@ class FrontController extends Controller {
         $category = ProductCategory::whereId(request('category'))->firstOrFail();
         $blogs = $category->products()->where('title', 'like', '%' . request('search') . '%')->paginate(9);
         return View::make('front.blog', compact('blogs', 'search'));
+    }
+
+    public function productModal(Request $request): JsonResponse {
+        $id = $request->input('id');
+        $product = Product::findOrFail($id);
+        return response()->json([
+            'product' => $product,
+            'categories' => $product->categories,
+            'tags' => $product->tags,
+            'ages' => $product->ages
+        ]);
     }
 }

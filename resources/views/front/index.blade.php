@@ -6,6 +6,26 @@
         .products:first-child {
             margin-top: 3rem;
         }
+
+        .product-card:hover .options {
+            opacity: 100%;
+        }
+
+        .options {
+            top: .25rem;
+            right: .25rem;
+            opacity: 0;
+            transition-duration: .3s;
+
+            button {
+                width: 2rem;
+                height: 2rem;
+
+                i {
+                    color: #15A9E3;
+                }
+            }
+        }
     </style>
 @endsection
 @section('content')
@@ -32,9 +52,9 @@
                          aria-labelledby="{{ $category->slug }}-tab">
                         <div class="product-row">
                             @foreach($category->products()->inRandomOrder()->get() as $product)
-                                <div class="product-card">
+                                <div class="product-card position-relative">
                                     <a href="{{ route('product.index', $product->slug) }}">
-                                        <div class="product-image">
+                                        <div class="product-image mx-auto">
                                             <img src="{{ asset(Storage::url($product->image)) }}" alt=""/>
                                         </div>
                                     </a>
@@ -60,6 +80,14 @@
                                                 {{ $product->price }} ₼
                                             @endif
                                         </div>
+                                    </div>
+                                    <div class="position-absolute options d-flex flex-column gap-3">
+                                        <button class="bg-white wishlist rounded-circle" id="{{ $product->id }}">
+                                            <i class="fa-regular fa-heart"></i>
+                                        </button>
+                                        <button class="bg-white rounded-circle look" id="{{ $product->id }}">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </button>
                                     </div>
                                 </div>
                             @endforeach
@@ -213,7 +241,7 @@
                          role="tabpanel" aria-labelledby="{{ $age->slug }}-tab">
                         <div class="product-row">
                             @foreach($age->products()->inRandomOrder()->get() as $product)
-                                <div class="product-card">
+                                <div class="product-card position-relative">
                                     <a href="{{ route('product.index', $product->slug) }}">
                                         <div class="product-image">
                                             <img src="{{ asset(Storage::url($product->image)) }}" alt=""/>
@@ -242,6 +270,14 @@
                                             @endif
                                         </div>
                                     </div>
+                                    <div class="position-absolute options d-flex flex-column gap-3">
+                                        <button class="bg-white wishlist rounded-circle" id="{{ $product->id }}">
+                                            <i class="fa-regular fa-heart"></i>
+                                        </button>
+                                        <button class="bg-white rounded-circle look" id="{{ $product->id }}">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             @endforeach
                         </div>
@@ -250,4 +286,41 @@
             </div>
         </div>
     </section>
+@endsection
+@section('js')
+    <script>
+        $('.wishlist').click(function() {
+            let id = $(this).attr('id');
+            $.ajax({
+                url: '{{ route('wishlist.store', ':id') }}'.replace(':id', id),
+                async: false,
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    if(response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Məhsul istək siyahısına əlavə olundu',
+                            timer: 2000
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Məhsul istək siyahısında mövcuddur.',
+                            timer: 2000
+                        })
+                    }
+                },
+                error: function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Məhsul istək siyahısına əlavə olunarkən xəta baş verdi',
+                        timer: 2000
+                    })
+                }
+            });
+        });
+    </script>
 @endsection

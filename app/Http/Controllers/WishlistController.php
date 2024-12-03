@@ -23,8 +23,9 @@ class WishlistController extends Controller {
         $wishlistProduct = $wishlist->wishlist_products()->where('product_id', $product->id)->first();
         if(!$wishlistProduct) {
             $wishlist->products()->attach($product->id);
+            return response()->json(['success' => true]);
         }
-        return response()->json();
+        return response()->json(['success' => false]);
     }
 
     public function delete(int $id): JsonResponse {

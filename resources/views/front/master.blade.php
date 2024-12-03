@@ -476,7 +476,6 @@
                         </nav>
                     </div>
                 </div>
-
             </div>
             <div class="copyright">
                 &copy; {{ date('Y') == 2024 ? 2024 : '2024 -' . date('Y') }} {{ $settings->title }}. Bütün
@@ -485,11 +484,140 @@
         </div>
     </div>
 </footer>
+<div class="modal modal-xl fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content p-4"></div>
+    </div>
+</div>
 <script src="{{ asset("front/jquery/jquery.min.js") }}"></script>
 <script src="{{ asset("front/bootstrap/js/bootstrap.min.js") }}"></script>
 <script src="{{ asset("front/swiper/swiper-bundle.min.js") }}"></script>
 <script src="{{ asset("front/js/slider.js") }}"></script>
 <script src="{{ asset("front/js/main.js") }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $('.look').click(function() {
+        let id = $(this).attr('id');
+        $.ajax({
+            url: "{{ route('product.modal') }}",
+            data: {
+                id: id
+            },
+            type: 'GET',
+            success: function(data) {
+                let price = data.product.discount ? `<div class="old-price">
+                    ${data.product.price} ₼
+                            </div>` : `<div class="old-price">
+                        ${data.product.discount} ₼
+                    </div>`;
+                let priceValue = data.product.discount ? data.product.discount : data.product.price + `₼`;
+                let body = `<div class="product-detail">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 mb-3">
+                    <div class="product-image">
+                        <img src="storage/${data.product.image}" alt="${data.product.title}" width="400"/>
+                    </div>
+                </div>
+                <div class="col-lg-5 mb-3">
+                    <div class="product-name">
+                        ${data.product.title}
+                </div>
+                <div class="features">
+                    ${data.product.description ?? ''}
+                </div>
+                <div class="price">` + price + `<div class="new-price">` + priceValue + `</div>
+                    </div>
+                    <div class="details">
+                    <form method="POST" action="{{ route('cart.store', ':id') }}"`.replace(':id', data.product.id) + `>
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+                    <div class="d-flex gap-3">
+                        <div class="counter">
+                            <button type="button" class="dec">-</button>
+                            <input type="number" value="1" min="1" name="quantity"/>
+                            <button type="button" class="inc">+</button>
+                        </div>
+                        <button id="${data.product.id}" class="add-to-cart">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.426 13.695">
+                                    <path
+                                        d="M17.388 3.087 15.361 9.47a1.074 1.074 0 0 1-1.023.758H6.516a1.117 1.117 0 0 1-1.042-.7L2.481 1.515H.758A.758.758 0 0 1 .758 0h2.254a.776.776 0 0 1 .72.511l3.087 8.2h7.2l1.61-5.114H6.705a.758.758 0 1 1 0-1.515h9.963a.753.753 0 0 1 .606.322.735.735 0 0 1 .114.683ZM6.895 11.232a1.229 1.229 0 1 0 .871.36 1.249 1.249 0 0 0-.871-.36Zm6.8 0a1.229 1.229 0 1 0 .871.36 1.249 1.249 0 0 0-.871-.36Z"/>
+                                </svg>
+                                Səbətə əlavə et
+                            </button>
+                        </div>
+                        </form>
+                </div>
+                <div class="details-2">
+                    <ul>
+                        <li>
+                            <h4>
+                                Kateqoriyalar:
+                            </h4>` +
+                    data.categories.map(category => `<a href="{{ route('product.category', ':slug') }}"`
+                        .replace(':slug', category.slug) + `>
+                                        ${category.title}
+                    </a>`) +
+                    `</li>
+                <li>
+                    <h4>
+                        Teqlər:
+                    </h4>` +
+                    data.tags.map(tag => `<a href="{{ route('product.tag', ':slug') }}"`.replace(':slug', tag.slug)
+                        + `>
+                    ${tag.title}
+                    </a>`) +
+                    `</li>
+                    <li>
+                        <h4>
+                        Yaş qrupları:
+                        </h4>` +
+                    data.ages.map(age => `<a href="{{ route('product.age', ':slug') }}"`.replace(':slug', age.slug) + `>
+                    ${age.title}
+                    </a>`) +
+                    `</li>
+                </ul>
+                </div>
+                </div>
+                </div>
+                    <div class="product-rewievs">
+                        <nav>
+                            <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                                        aria-selected="true">
+                                    Ətraflı
+                                </button>
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade active show" id="nav-home" role="tabpanel"
+                                 aria-labelledby="nav-home-tab">
+                                <div class="desc-detail">
+                                    ${data.product.text ?? ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>`;
+                $('.modal-content').html(body);
+                $('.modal').modal('show');
+            }
+        });
+    });
+    $('#exampleModal').on('shown.bs.modal', function() {
+        let input = $('.modal input[name="quantity"]');
+        $('.inc').click(function() {
+            input.val(parseInt(input.val()) + 1);
+        });
+        $('.dec').click(function() {
+            if(input.val() > 1) {
+                input.val(parseInt(input.val()) - 1);
+                $('.inc').attr('disabled', false).css('cursor', 'pointer');
+            }
+        });
+    });
+</script>
 @yield('js')
 </body>
 </html>

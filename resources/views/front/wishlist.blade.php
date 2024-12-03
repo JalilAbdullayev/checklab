@@ -73,9 +73,18 @@
                 },
                 success: function() {
                     $('li#' + id + '').remove();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Məhsul istək siyahısından silindi',
+                        timer: 2000
+                    })
                 },
                 error: function() {
-                    alert('error');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Məhsul istək siyahısından silinərkən xəta baş verdi',
+                        timer: 2000
+                    })
                 }
             });
         })
