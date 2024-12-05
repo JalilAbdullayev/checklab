@@ -12,79 +12,78 @@ use App\Models\ProductCategory;
 use App\Models\ProductTag;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
-use Illuminate\View\View as Viewable;
+use Illuminate\View\View;
 
 class FrontController extends Controller {
-    public function index(): Viewable {
+    public function index(): View {
         $categories = ProductCategory::has('products')->inRandomOrder()->get();
         $allProducts = Product::where('discount', '>', 0)->take(5)->get();
         $ages = AgeGroup::has('products')->get();
-        return View::make('front.index', compact('categories', 'allProducts', 'ages'));
+        return view('front.index', compact('categories', 'allProducts', 'ages'));
     }
 
-    public function about(): Viewable {
+    public function about(): View {
         $about = About::firstOrFail();
-        return View::make('front.about', compact('about'));
+        return view('front.about', compact('about'));
     }
 
-    public function blog(): Viewable {
+    public function blog(): View {
         $blogs = Blog::paginate(9);
-        return View::make('front.blog', compact('blogs'));
+        return view('front.blog', compact('blogs'));
     }
 
-    public function blogCategories(string $slug): Viewable {
+    public function blogCategories(string $slug): View {
         $category = BlogCategory::whereSlug($slug)->firstOrFail();
         $blogs = Blog::where('category_id', $category->id)->get();
-        return View::make('front.blog', compact('blogs'));
+        return view('front.blog', compact('blogs'));
     }
 
-    public function blogTags(string $slug): Viewable {
+    public function blogTags(string $slug): View {
         $tag = BlogTag::whereSlug($slug)->firstOrFail();
         $blogs = $tag->blogs()->get();
-        return View::make('front.blog', compact('blogs'));
+        return view('front.blog', compact('blogs'));
     }
 
-    public function blogDetail(string $slug): Viewable {
+    public function blogDetail(string $slug): View {
         $blog = Blog::whereSlug($slug)->firstOrFail();
         $otherPosts = Blog::where('id', '!=', $blog->id)->get();
-        return View::make('front.blog-detail', compact('blog', 'otherPosts'));
+        return view('front.blog-detail', compact('blog', 'otherPosts'));
     }
 
-    public function productDetail(string $slug): Viewable {
+    public function productDetail(string $slug): View {
         $product = Product::whereSlug($slug)->firstOrFail();
         $otherProducts = Product::where('id', '!=', $product->id)->take(6)->get();
         $id = $product->id;
-        return View::make('front.product-detail', compact('product', 'otherProducts', 'id'));
+        return view('front.product-detail', compact('product', 'otherProducts', 'id'));
     }
 
-    public function productCategories(string $slug): Viewable {
+    public function productCategories(string $slug): View {
         $category = ProductCategory::whereSlug($slug)->firstOrFail();
         $blogs = $category->products()->paginate(9);
-        return View::make('front.blog', compact('blogs', 'category'));
+        return view('front.blog', compact('blogs', 'category'));
     }
 
-    public function productTags(string $slug): Viewable {
+    public function productTags(string $slug): View {
         $tag = ProductTag::whereSlug($slug)->firstOrFail();
         $blogs = $tag->products()->paginate(9);
-        return View::make('front.blog', compact('blogs', 'tag'));
+        return view('front.blog', compact('blogs', 'tag'));
     }
 
     public function ages($slug) {
         $age = AgeGroup::whereSlug($slug)->firstOrFail();
         $blogs = $age->products()->paginate(9);
-        return View::make('front.blog', compact('blogs', 'age'));
+        return view('front.blog', compact('blogs', 'age'));
     }
 
-    public function contact(): Viewable {
-        return View::make('front.contact');
+    public function contact(): View {
+        return view('front.contact');
     }
 
-    public function search() {
+    public function search(): View {
         $search = request('search');
         $category = ProductCategory::whereId(request('category'))->firstOrFail();
         $blogs = $category->products()->where('title', 'like', '%' . request('search') . '%')->paginate(9);
-        return View::make('front.blog', compact('blogs', 'search'));
+        return view('front.blog', compact('blogs', 'search'));
     }
 
     public function productModal(Request $request): JsonResponse {
@@ -96,5 +95,11 @@ class FrontController extends Controller {
             'tags' => $product->tags,
             'ages' => $product->ages
         ]);
+    }
+
+    public function rate($id, Request $request): JsonResponse {
+        $product = Product::findOrFail($id);
+        $product->rateOnce($request->rate);
+        return response()->json(['average' => number_format($product->averageRating, 1)]);
     }
 }

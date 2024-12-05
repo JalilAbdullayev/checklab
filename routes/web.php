@@ -42,6 +42,7 @@ Route::controller(FrontController::class)->group(function() {
         Route::get('tag/{slug}', 'productTags')->name('tag');
         Route::get('age/{slug}', 'ages')->name('age');
         Route::get('modal', 'productModal')->name('modal');
+        Route::post('rate/{id}', 'rate')->name('rate');
     });
     Route::get('search', 'search')->name('search');
 });

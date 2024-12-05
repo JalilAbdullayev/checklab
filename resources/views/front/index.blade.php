@@ -81,6 +81,16 @@
                                             @endif
                                         </div>
                                     </div>
+                                    <div id="{{ $product->id }}" class="rating">
+                                        @for($i = 1; $i <= 5; $i++)
+                                            <i data-rate="{{ $i }}"
+                                                @class(["fa-solid fa-star",  "text-warning" => $i <= $product->averageRating])
+                                            ></i>
+                                        @endfor
+                                        <span>
+                                            {{ number_format($product->averageRating, 1) }}
+                                        </span>
+                                    </div>
                                     <div class="position-absolute options d-flex flex-column gap-3">
                                         <button class="bg-white wishlist rounded-circle" id="{{ $product->id }}">
                                             <i class="fa-regular fa-heart"></i>
@@ -278,6 +288,16 @@
                                             <i class="fa-solid fa-magnifying-glass"></i>
                                         </button>
                                     </div>
+                                    <div id="{{ $product->id }}" class="rating">
+                                        @for($i = 1; $i <= 5; $i++)
+                                            <i data-rate="{{ $i }}"
+                                                @class(["fa-solid fa-star",  "text-warning" => $i <= $product->averageRating])
+                                            ></i>
+                                        @endfor
+                                        <span>
+                                            {{ number_format($product->averageRating, 1) }}
+                                        </span>
+                                    </div>
                                 </div>
                             @endforeach
                         </div>
@@ -319,6 +339,24 @@
                         title: 'Məhsul istək siyahısına əlavə olunarkən xəta baş verdi',
                         timer: 2000
                     })
+                }
+            });
+        });
+        $('.fa-star').click(function() {
+            let rate = $(this).data('rate');
+            let id = $(this).parent().attr('id');
+            $.ajax({
+                url: '{{ route('product.rate', ':id') }}'.replace(':id', id),
+                async: false,
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    rate: rate
+                },
+                success: function(response) {
+                    $(`.rating#${id} i`).removeClass('text-warning');
+                    $(`.rating#${id} i[data-rate="${rate}"]`).prevAll('i').addBack().addClass('text-warning');
+                    $(`.rating#${id} span`).text(response.average);
                 }
             });
         });
